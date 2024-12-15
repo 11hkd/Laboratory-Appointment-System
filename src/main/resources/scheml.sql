@@ -44,6 +44,9 @@ CREATE TABLE `appointment` (
    uid INT NOT NULL,
    lid INT NOT NULL,
    cid INT NOT NULL,
+   week TINYINT UNSIGNED NOT NULL, # 第几周
+   section TINYINT UNSIGNED NOT NULL , # 第几节
+   day_of_week TINYINT UNSIGNED NOT NULL,  # 周几
    status ENUM('pending', 'approved', 'rejected', 'canceled') NOT NULL DEFAULT 'pending',  # 待处理 通过 拒绝 取消
    details JSON NULL COMMENT '{
         "reason": "预约原因",
@@ -54,6 +57,8 @@ CREATE TABLE `appointment` (
    update_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
    FOREIGN KEY (`uid`) REFERENCES `users`(`id`),
    FOREIGN KEY (`lid`) REFERENCES `labs`(`id`),
-   FOREIGN KEY (`cid`) REFERENCES `courses`(`id`)
+   FOREIGN KEY (`cid`) REFERENCES `courses`(`id`),
+   UNIQUE (week,day_of_week,section),
+   index (cid)
 );
 
