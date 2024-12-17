@@ -36,6 +36,7 @@ public class AdminService {
 
     /**
      * 批量删除
+     * 1
      */
     public void deleteBatch(List<Integer> ids) {
         for (Integer id : ids) {
