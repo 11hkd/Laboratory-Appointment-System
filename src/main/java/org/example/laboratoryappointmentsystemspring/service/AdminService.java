@@ -2,7 +2,7 @@ package org.example.laboratoryappointmentsystemspring.service;
 
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
-import org.example.laboratoryappointmentsystemspring.repository.AdminRepository;
+import org.example.laboratoryappointmentsystemspring.mapper.repository.AdminRepository;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
