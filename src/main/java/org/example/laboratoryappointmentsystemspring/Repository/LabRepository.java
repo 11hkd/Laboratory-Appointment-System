@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LabRepository extends CrudRepository<Lab,String> {
+
     //根据实验室名查找
     @Query("SELECT * from lab where labName=:labName")
     public Lab findByLabName(String labName);
@@ -23,4 +24,7 @@ public interface LabRepository extends CrudRepository<Lab,String> {
     @Query("update lab set labLocation=:labLocation,labCapacity=:labCapacity,labType=:labType where labName=:labName")
     public Lab updateLab(String labName,String labLocation,String labCapacity,String labType);
 
+    //查看所有实验室信息
+    @Query("SELECT * from lab")
+    public Lab findAllLab();
 }

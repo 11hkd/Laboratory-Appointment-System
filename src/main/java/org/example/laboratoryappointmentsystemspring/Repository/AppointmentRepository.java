@@ -21,4 +21,7 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Strin
     @Query("update appointment set labName=:labName,labLocation=:labLocation,labCapacity=:labCapacity,labType=:labType,appointmentDate=:appointmentDate,appointmentTime=:appointmentTime,appointmentPurpose=:appointmentPurpose,appointmentStatus=:appointmentStatus where appointmentId=:appointmentId")
     public Appointment updateAppointment(String appointmentId, String labName, String labLocation, String labCapacity, String labType, String appointmentDate, String appointmentTime, String appointmentPurpose, String appointmentStatus);
 
+    //根据教师id查找
+    @Query("SELECT * from appointment where teacherId=:teacherId")
+    public Appointment findByTeacherId(String teacherId);
 }

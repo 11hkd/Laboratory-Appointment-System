@@ -2,75 +2,56 @@ package org.example.laboratoryappointmentsystemspring.service;
 
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
-import org.example.laboratoryappointmentsystemspring.mapper.repository.AdminRepository;
+import org.example.laboratoryappointmentsystemspring.mapper.repository.*;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class AdminService {
 
-    @Resource
-    private final AdminRepository adminRepository;
+    private AppointmentRepository appointmentRepository;
+    private CourseRepository courseRepository;
+    private LabRepository labRepository;
+    private UserRepository userRepository;
 
-    public void add(Admin admin) {
-        Admin savedAdmin = adminRepository.save(admin);
-        if (ObjectUtil.isNotNull(dbLabadmin)) {
-            throw new CustomException(ResultCodeEnum.USER_EXIST_ERROR);
-        }
-        if (ObjectUtil.isEmpty(labadmin.getPassword())) {
-            labadmin.setPassword(Constants.USER_DEFAULT_PASSWORD);
-        }
-        if (ObjectUtil.isEmpty(labadmin.getName())) {
-            labadmin.setName(labadmin.getUsername());
-        }
-        labadmin.setRole(RoleEnum.LABADMIN.name());
-        labadminMapper.insert(labadmin);
+    //添加用户账号
+    public void addUser(String username, String password, String role) {
+        return UserRepository.addUser(username, password, role);
     }
 
-    /**
-     * 删除
-     */
-    public void deleteById(Integer id) {
-        labadminMapper.deleteById(id);
+    //删除用户账号
+    public void deleteUser(String username) {
+        return UserRepository.deleteByUsername(username);
     }
 
-    /**
-     * 批量删除
-     * 1
-     */
-    public void deleteBatch(List<Integer> ids) {
-        for (Integer id : ids) {
-            labadminMapper.deleteById(id);
-        }
+    //修改用户账号
+    public void updateUser(String username, String password, String role) {
+        return UserRepository.updateUser(username, password, role);
     }
 
-    /**
-     * 修改
-     */
-    public void updateById(Labadmin labadmin) {
-        labadminMapper.updateById(labadmin);
+    //查找用户账号
+    public void findUser(String username) {
+        return UserRepository.findByUsername(username);
     }
 
-    /**
-     * 根据ID查询
-     */
-    public Labadmin selectById(Integer id) {
-        return labadminMapper.selectById(id);
+    //添加实验室信息
+    public void addLab(String labName, String labLocation, String labCapacity) {
+        return LabRepository.addLab(labName, labLocation, labCapacity);
     }
 
-    /**
-     * 查询所有
-     */
-    public List<Labadmin> selectAll(Labadmin labadmin) {
-        return labadminMapper.selectAll(labadmin);
+    //删除实验室信息
+    public void deleteLab(String labName) {
+        return LabRepository.deleteByLabName(labName);
     }
 
-    /**
-     * 分页查询
-     */
-    public PageInfo<Labadmin> selectPage(Labadmin labadmin, Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<Labadmin> list = labadminMapper.selectAll(labadmin);
-        return PageInfo.of(list);
+    //修改实验室信息
+    public void updateLab(String labName, String labLocation, String labCapacity) {
+        return LabRepository.updateLab(labName, labLocation, labCapacity);
     }
+
+    //查找实验室信息
+    public void findLab(String labName) {
+        return LabRepository.findByLabName(labName);
+    }
+
 }

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends CrudRepository<User,String> {
+    //用户ID查找
+    @Query("SELECT * from user where id=:id")
+    public User findById(int id);
 
     //用户名查找
     @Query("SELECT * from user where username=:username")
@@ -24,6 +27,9 @@ public interface UserRepository extends CrudRepository<User,String> {
     @Query("update user set password=:password,role=:role where username=:username")
     public User updateUser(String username,String password,String role);
 
+    //根据账号Account获取用户
+    @Query("SELECT * from user where account=:account")
+    public User findByAccount(String Account);
 
 
 
