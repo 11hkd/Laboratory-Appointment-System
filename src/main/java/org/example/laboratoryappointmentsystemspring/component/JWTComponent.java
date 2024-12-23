@@ -15,7 +15,7 @@ public class JWTComponent {
     //私钥
 //    对这个JWT进行签名算法，用户带着JWT过来，签个名，然后用户带走，到其他界面用户再根据同样的算法检查这个签名对不对
 //    来检测JWT这个JWT是不是被篡改过
-    @Value("${my.secretkey}")
+    @Value("hkd")
     private String secretKey;
     private Algorithm algorithm;//这是一个算法对象
     @PostConstruct//这个注解是在构造函数之后执行的
