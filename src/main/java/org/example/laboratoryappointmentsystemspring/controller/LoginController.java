@@ -28,7 +28,7 @@ public class LoginController {
 
     @PostMapping("login")
     public ResultVO login(@RequestBody Login login, HttpServletResponse resp) {
-        User user = userService.findByAccount(login.getAccount());
+        User user = userService.findByAccount(login.getAccount()); //这个是根据账号查找用户
 
         if (user == null || !passwordEncoder.matches(login.getPassword(), user.getPassword())) {
             return ResultVO.error(401, "用户名或密码错误");
@@ -38,6 +38,6 @@ public class LoginController {
         resp.addHeader("token", jwt);
         resp.addHeader("role", user.getRole());
 
-        return ResultVO.success(Map.of("user", user));
+        return ResultVO.success(Map.of("user", user));//返回用户信息
     }
 }
