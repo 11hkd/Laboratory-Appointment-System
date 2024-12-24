@@ -1,6 +1,7 @@
 package org.example.laboratoryappointmentsystemspring.controller;
 
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.laboratoryappointmentsystemspring.component.JWTComponent;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
@@ -22,22 +24,31 @@ import java.util.Map;
 @RequestMapping("/url/")
 public class LoginController {
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
-    //private final ObjectMapper objectMapper;//这个是用来把对象转换成json字符串的
+    private final ObjectMapper objectMapper;
     private final JWTComponent jwtComponent;
 
     @PostMapping("login")
     public ResultVO login(@RequestBody Login login, HttpServletResponse resp) {
-        User user = userService.findByAccount(login.getAccount()); //这个是根据账号查找用户
+        User user = userService.findByAccount(login.getAccount());
 
-        if (user == null || !passwordEncoder.matches(login.getPassword(), user.getPassword())) {
+        if (user == null || (login.getPassword()).equals(user.getPassword())) {
             return ResultVO.error(401, "用户名或密码错误");
         }
 
-        String jwt = jwtComponent.encode(Map.of("uid", user.getId(), "role", user.getRole(),"depId"));
+        // 使用HashMap来创建Map实例并添加键值对，替代Map.of方法
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", user.getId());
+        map.put("role", user.getRole());
+        // 这里原代码中"depId"没有对应的值，如果需要可以补充正确逻辑获取对应值后添加，这里先按原样添加键
+        map.put("depId", null);
+
+        String jwt = jwtComponent.encode(map);
         resp.addHeader("token", jwt);
         resp.addHeader("role", user.getRole());
 
-        return ResultVO.success(Map.of("user", user));//返回用户信息
+        // 同样使用HashMap来创建返回的Map实例
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("user", user);
+        return ResultVO.success(resultMap);
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 
+import static io.swagger.v3.oas.annotations.security.SecurityScheme.*;
+
 @Configuration
 public class OpenAPIConfig {
     @Bean
