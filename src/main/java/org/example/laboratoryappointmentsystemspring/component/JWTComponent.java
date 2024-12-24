@@ -6,7 +6,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com. auth0.jwt. algorithms. Algorithm;
 import jakarta.annotation.PostConstruct;
 import org.example.laboratoryappointmentsystemspring.exception.Code;
-import org.example.laboratoryappointmentsystemspring.exception.XException;
+import org.example.laboratoryappointmentsystemspring.exception.xException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -48,9 +48,9 @@ public class JWTComponent {
             return JWT.require(algorithm).build().verify(token);//这个是验证签名
         } catch (TokenExpiredException | SignatureVerificationException e){
             if(e instanceof SignatureVerificationException) {
-                throw XException.builder().code(Code.FORBIDDEN).build();
+                throw xException.builder().code(Code.FORBIDDEN).build();
             }
-            throw XException.builder().code(Code.TOKEN_EXPIRED).build();
+            throw xException.builder().code(Code.TOKEN_EXPIRED).build();
         }
     }
 }

@@ -2,10 +2,10 @@ package org.example.laboratoryappointmentsystemspring.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import org.example.graduatemanage.exception.Code;
+//import org.example.graduatemanage.exception.Code;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.graduatemanage.exception.Code;
+//import org.example.graduatemanage.exception.Code;
 @Data
 @Builder
 @AllArgsConstructor
@@ -40,13 +40,13 @@ public class ResultVO {
                 .build();
     }
 
-    //当存在通用异常码的时候
-    public static ResultVO error(Code code){
-        return ResultVO.builder().code(code.getCode())
-                .timestamp(System.currentTimeMillis())
-                .message(code.getMessage()).
-                build();
-    }
+//    //当存在通用异常码的时候
+//    public static ResultVO error(Code code){
+//        return ResultVO.builder().code(code.getCode())
+//                .timestamp(System.currentTimeMillis())
+//                .message(code.getMessage()).
+//                build();
+//    }
 
     //不存在通用异常码的时候
     public static ResultVO error(int code,String message){

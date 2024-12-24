@@ -11,7 +11,6 @@ public class LaboratoryAppointmentSystemSpringApplication extends SpringBootServ
     public static void main(String[] args) {
         SpringApplication.run(LaboratoryAppointmentSystemSpringApplication.class, args);
     }
-
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return super.configure(builder);
