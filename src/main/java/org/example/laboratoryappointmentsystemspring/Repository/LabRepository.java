@@ -1,30 +1,39 @@
 package org.example.laboratoryappointmentsystemspring.Repository;
 
 import org.example.laboratoryappointmentsystemspring.dox.Lab;
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface LabRepository extends CrudRepository<Lab,String> {
+import java.util.List;
 
-    //根据实验室名查找
-    @Query("SELECT * from lab where labName=:labName")
+@Repository
+public interface LabRepository extends CrudRepository<Lab, Integer> {
+    // 根据实验室名查找
+    @Query("SELECT * from labs where name=:labName")
     public Lab findByLabName(String labName);
 
-    //添加实验室信息
-    @Query("insert into lab(labName,labLocation,labCapacity,labType) values(:labName,:labLocation,:labCapacity,:labType)")
-    public Lab addLab(String labName,String labLocation,String labCapacity,String labType);
+    // 添加实验室信息
+    @Modifying
+    @Transactional
+    @Query("insert into labs(number, information, news, name) values(:number, :information, :news, :labName)")
+    public void addLab(Integer number, String information, String news, String labName);
 
-    //删除实验室信息
-    @Query("delete from lab where labName=:labName")
+    // 删除实验室信息
+    @Modifying
+    @Transactional
+    @Query("delete from labs where name=:labName")
     public void deleteByLabName(String labName);
 
-    //修改实验室信息
-    @Query("update lab set labLocation=:labLocation,labCapacity=:labCapacity,labType=:labType where labName=:labName")
-    public Lab updateLab(String labName,String labLocation,String labCapacity,String labType);
+    // 修改实验室信息
+    @Modifying
+    @Transactional
+    @Query("update labs set number=:number, information=:information, news=:news where name=:labName")
+    public void updateLab(String labName, Integer number, String information, String news);
 
-    //查看所有实验室信息
-    @Query("SELECT * from lab")
-    public Lab findAllLab();
+    // 查看所有实验室信息
+    @Query("SELECT * from labs")
+    public List<Lab> findAllLabs();
 }

@@ -1,40 +1,43 @@
 package org.example.laboratoryappointmentsystemspring.Repository;
 
 import org.example.laboratoryappointmentsystemspring.dox.User;
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserRepository extends CrudRepository<User,String> {
-    //用户ID查找
-    @Query("SELECT * from user where id=:id")
-    public User findById(int id);
+import java.util.Optional;
 
-    //用户名查找
-    @Query("SELECT * from user where username=:username")
+@Repository
+public interface UserRepository extends CrudRepository<User, Integer> {
+    // 根据用户ID查找
+    @Query("SELECT * from users where id=:id")
+    public Optional<User> findById(Integer id);
+
+    // 根据用户名查找
+    @Query("SELECT * from users where username=:username")
     public User findByUsername(String username);
 
-    //添加用户
-    @Query("insert into user(username,password,role) values(:username,:password,:role)")
-    public User addUser(String username,String password,String role);
+    // 添加用户
+    @Modifying
+    @Transactional
+    @Query("insert into users(username, phone, account, password, role) values(:username, :phone, :account, :password, :role)")
+    public void addUser(String username, String phone, String account, String password, String role);
 
-    //删除用户
-    @Query("delete from user where username=:username")
+    // 删除用户
+    @Modifying
+    @Transactional
+    @Query("delete from users where username=:username")
     public void deleteByUsername(String username);
 
-    //修改用户
-    @Query("update user set password=:password,role=:role where username=:username")
-    public User updateUser(String username,String password,String role);
+    // 修改用户
+    @Modifying
+    @Transactional
+    @Query("update users set password=:password, role=:role where username=:username")
+    public void updateUser(String username, String password, String role);
 
-    //根据账号Account获取用户
-    @Query("SELECT * from user where account=:account")
-    public User findByAccount(String Account);
-
-
-
-
-
-
-
+    // 根据账号Account获取用户
+    @Query("SELECT * from users where account=:account")
+    public User findByAccount(String account);
 }
