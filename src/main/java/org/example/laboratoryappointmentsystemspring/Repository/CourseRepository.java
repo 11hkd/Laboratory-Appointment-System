@@ -7,6 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CourseRepository extends CrudRepository<Course, Integer> {
     // 根据课程名查找
@@ -27,10 +29,9 @@ public interface CourseRepository extends CrudRepository<Course, Integer> {
     @Query("delete from courses where name=:courseName")
     public void deleteByCourseName(String courseName);
 
-    // 修改课程信息
-    // 使更新语句的字段与数据表结构对应，确保能正确更新相应字段的值
-    @Modifying
-    @Transactional
-    @Query("update courses set uid=:uid, lid=:lid, count=:count, information=:information, week=:week, time=:time where name=:courseName")
-    public void updateCourse(String courseName, Integer uid, Integer lid, Integer count, String information, String week, String time);
+    // 获取用户的课程列表（通过用户id关联查询课程，需要根据实际业务逻辑和数据表关联关系完善）
+    @Query("SELECT * from courses where uid=:uid")
+    List<Course> findByUid(Integer uid);
+
+
 }

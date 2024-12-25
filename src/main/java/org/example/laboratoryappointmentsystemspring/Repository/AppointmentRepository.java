@@ -6,6 +6,8 @@ import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface AppointmentRepository extends CrudRepository<Appointment, Integer> {
     // 根据预约号查找
     @Query("SELECT * from appointment where id=:appointmentId")
@@ -24,14 +26,9 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
     @Query("delete from appointment where id=:appointmentId")
     public void deleteByAppointmentId(Integer appointmentId);
 
-    // 修改预约信息
-    // 同样修改更新语句的字段使其准确对应表结构，并且参数类型匹配
-    @Modifying
-    @Transactional
-    @Query("update appointment set uid=:uid, lid=:lid, cid=:cid, week=:week, section=:section, day_of_week=:day_of_week, status=:status, details=:details where id=:appointmentId")
-    public void updateAppointment(Integer appointmentId, Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, String details);
 
-    // 根据教师id查找（这里假设教师id在业务逻辑中有对应字段关联，比如存放在details等字段中以JSON格式存储相关信息，需要根据实际调整查询语句）
-    @Query("SELECT * from appointment where details->>'$.teacherId' = :teacherId")
-    public Appointment findByTeacherId(String teacherId);
+    //按用户id查找所有预约记录
+    @Query("SELECT * from appointment where uid=:uid")
+    //这里返回值类型应该是List<Appointment>，因为一个用户可能有多条预约记录
+    List<Appointment> findByUid(Integer uid);
 }

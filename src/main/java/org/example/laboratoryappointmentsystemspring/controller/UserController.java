@@ -25,17 +25,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    // 查看教师课程（根据教师ID）
-    @Operation(summary = "查看教师课程", description = "根据传入的教师ID，获取该教师对应的课程信息列表")
-    @GetMapping("/{teacherId}/courses")
-    public ResponseEntity<ResultVO> viewTeacherCourses(@PathVariable String teacherId) {
-        List<Appointment> courses = userService.viewCourse(teacherId);
-        if (courses!= null &&!courses.isEmpty()) {
-            return ResponseEntity.ok(ResultVO.success(courses));
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应教师的课程信息"));
-    }
-
     // 添加预约信息
     @Operation(summary = "添加预约信息", description = "添加新的预约信息")
     @PostMapping("/appointments")
@@ -49,22 +38,6 @@ public class UserController {
                                                    @RequestParam String details) {
         userService.addAppointment(uid, lid, cid, week, section, day_of_week, status, details);
         return ResponseEntity.status(HttpStatus.CREATED).body(ResultVO.ok());
-    }
-
-    // 修改预约信息
-    @Operation(summary = "修改预约信息", description = "根据预约ID等信息修改预约内容")
-    @PutMapping("/appointments/{appointmentId}")
-    public ResponseEntity<ResultVO> updateAppointment(@PathVariable Integer appointmentId,
-                                                      @RequestParam Integer uid,
-                                                      @RequestParam Integer lid,
-                                                      @RequestParam Integer cid,
-                                                      @RequestParam Integer week,
-                                                      @RequestParam Integer section,
-                                                      @RequestParam Integer day_of_week,
-                                                      @RequestParam String status,
-                                                      @RequestParam String details) {
-        userService.updateAppointment(appointmentId, uid, lid, cid, week, section, day_of_week, status, details);
-        return ResponseEntity.ok(ResultVO.ok());
     }
 
     // 删除预约信息
@@ -97,7 +70,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应用户信息"));
     }
 
-    // 获取用户的课程列表（假设通过用户ID）
+    // 获取用户的课程列表
     @Operation(summary = "获取用户的课程列表", description = "根据传入的用户ID，获取该用户对应的课程列表信息")
     @GetMapping("/{userId}/courses")
     public ResponseEntity<ResultVO> getUserCourses(@PathVariable Integer userId) {
@@ -108,7 +81,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到该用户的课程信息"));
     }
 
-    // 获取用户的预约历史（假设通过用户ID）
+    // 获取用户的预约历史
     @Operation(summary = "获取用户的预约历史", description = "根据传入的用户ID，获取该用户的预约历史记录")
     @GetMapping("/{userId}/appointments")
     public ResponseEntity<ResultVO> getUserAppointments(@PathVariable Integer userId) {

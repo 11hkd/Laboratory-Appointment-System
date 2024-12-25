@@ -27,20 +27,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // 查看自己课程（假设这里是查找教师相关课程，根据之前的持久层定义调整方法调用及返回值处理）
-    public List<Appointment> viewCourse(String teacherId) {
-        return (List<Appointment>) appointmentRepository.findByTeacherId(teacherId);
-    }
-
     // 添加预约信息（根据更新后的AppointmentRepository中addAppointment方法的定义调整参数传递）
     public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, String details) {
         appointmentRepository.addAppointment(uid, lid, cid, week, section, day_of_week, status, details);
     }
 
-    // 修改预约信息（同样依据持久层对应方法调整参数传递等）
-    public void updateAppointment(Integer appointmentId, Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, String details) {
-        appointmentRepository.updateAppointment(appointmentId, uid, lid, cid, week, section, day_of_week, status, details);
-    }
+
 
     // 删除预约信息（按照持久层定义的参数类型来传递参数）
     public void deleteAppointment(Integer appointmentId) {
@@ -61,13 +53,11 @@ public class UserService {
 
     // 获取用户的课程列表（假设通过用户id关联查询课程，需要根据实际业务逻辑和数据表关联关系完善）
     public List<Course> getUserCourses(Integer userId) {
-        // 这里可能需要调用CourseRepository相关方法，根据用户id查找对应的课程，具体实现根据业务逻辑补充完整
-        return null;
+        return (List<Course>) courseRepository.findByUid(userId);
     }
 
     // 获取用户的预约历史（假设通过用户id关联查询预约记录，同样需根据实际完善）
     public List<Appointment> getUserAppointments(Integer userId) {
-        // 调用AppointmentRepository相关方法，按用户id查找预约记录，此处代码待完善
-        return null;
+    return (List<Appointment>) appointmentRepository.findByUid(userId);
     }
 }

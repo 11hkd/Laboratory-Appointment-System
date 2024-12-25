@@ -27,12 +27,6 @@ public interface LabRepository extends CrudRepository<Lab, Integer> {
     @Query("delete from labs where name=:labName")
     public void deleteByLabName(String labName);
 
-    // 修改实验室信息
-    @Modifying
-    @Transactional
-    @Query("update labs set number=:number, information=:information, news=:news where name=:labName")
-    public void updateLab(String labName, Integer number, String information, String news);
-
     // 查看所有实验室信息
     @Query("SELECT * from labs")
     public List<Lab> findAllLabs();

@@ -42,16 +42,6 @@ public class AdminController {
         return ResponseEntity.ok(ResultVO.ok());
     }
 
-    // 修改用户账号
-    @Operation(summary = "修改用户账号", description = "根据用户名修改用户账号信息")
-    @PutMapping("/users/{username}")
-    public ResponseEntity<ResultVO> updateUser(@PathVariable String username,
-                                               @RequestParam String password,
-                                               @RequestParam String role) {
-        adminService.updateUser(username, password, role);
-        return ResponseEntity.ok(ResultVO.ok());
-    }
-
     // 查找用户账号
     @Operation(summary = "查找用户账号", description = "根据用户名查找用户账号")
     @GetMapping("/users/{username}")
@@ -79,17 +69,6 @@ public class AdminController {
     @DeleteMapping("/labs/{labName}")
     public ResponseEntity<ResultVO> deleteLab(@PathVariable String labName) {
         adminService.deleteLab(labName);
-        return ResponseEntity.ok(ResultVO.ok());
-    }
-
-    // 修改实验室信息
-    @Operation(summary = "修改实验室信息", description = "根据实验室名修改实验室信息")
-    @PutMapping("/labs/{labName}")
-    public ResponseEntity<ResultVO> updateLab(@PathVariable String labName,
-                                              @RequestParam String number,
-                                              @RequestParam String information,
-                                              @RequestParam String news) {
-        adminService.updateLab(labName, number, information, news);
         return ResponseEntity.ok(ResultVO.ok());
     }
 
@@ -123,20 +102,6 @@ public class AdminController {
     @DeleteMapping("/courses/{courseName}")
     public ResponseEntity<ResultVO> deleteCourse(@PathVariable String courseName) {
         adminService.deleteCourse(courseName);
-        return ResponseEntity.ok(ResultVO.ok());
-    }
-
-    // 修改课程信息
-    @Operation(summary = "修改课程信息", description = "根据课程名修改课程信息")
-    @PutMapping("/courses/{courseName}")
-    public ResponseEntity<ResultVO> updateCourse(@PathVariable String courseName,
-                                                 @RequestParam Integer uid,
-                                                 @RequestParam Integer lid,
-                                                 @RequestParam Integer count,
-                                                 @RequestParam String information,
-                                                 @RequestParam String week,
-                                                 @RequestParam String time) {
-        adminService.updateCourse(courseName, uid, lid, count, information, week, time);
         return ResponseEntity.ok(ResultVO.ok());
     }
 

@@ -31,12 +31,6 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("delete from users where username=:username")
     public void deleteByUsername(String username);
 
-    // 修改用户
-    @Modifying
-    @Transactional
-    @Query("update users set password=:password, role=:role where username=:username")
-    public void updateUser(String username, String password, String role);
-
     // 根据账号Account获取用户
     @Query("SELECT * from users where account=:account")
     public User findByAccount(String account);

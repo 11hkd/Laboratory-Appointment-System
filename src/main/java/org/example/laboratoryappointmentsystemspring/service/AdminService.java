@@ -30,10 +30,7 @@ public class AdminService {
         userRepository.deleteByUsername(username);
     }
 
-    // 修改用户账号（按照UserRepository.updateUser方法要求传递参数，返回值设为void，因为更新操作通常不需要返回完整用户对象）
-    public void updateUser(String username, String password, String role) {
-        userRepository.updateUser(username, password, role);
-    }
+
 
     // 查找用户账号（调用UserRepository.findByUsername方法，返回查找到的User对象，方便后续业务逻辑使用）
     public User findUser(String username) {
@@ -50,10 +47,7 @@ public class AdminService {
         labRepository.deleteByLabName(labName);
     }
 
-    // 修改实验室信息（按照LabRepository.updateLab方法的参数格式传递参数，返回值为void，进行更新操作）
-    public void updateLab(String labName, String number, String information, String news) {
-        labRepository.updateLab(labName, Integer.parseInt(number), information, news);
-    }
+
 
     // 查找实验室信息（调用LabRepository.findByLabName方法，返回Lab对象便于后续业务使用）
     public Lab findLab(String labName) {
@@ -70,11 +64,6 @@ public class AdminService {
     // 删除课程信息（调用CourseRepository.deleteByCourseName方法，传递正确参数，返回值为void执行删除）
     public void deleteCourse(String courseName) {
         courseRepository.deleteByCourseName(courseName);
-    }
-
-    // 修改课程信息（按照CourseRepository.updateCourse方法的参数传递要求，返回值为void进行更新操作）
-    public void updateCourse(String courseName, Integer uid, Integer lid, Integer count, String information, String week, String time) {
-        courseRepository.updateCourse(courseName, uid, lid, count, information, week, time);
     }
 
     // 查找课程信息（调用CourseRepository.findByCourseName方法，返回查找到的Course对象供后续业务使用）
