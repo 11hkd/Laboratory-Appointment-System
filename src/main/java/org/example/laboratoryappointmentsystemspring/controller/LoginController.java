@@ -23,7 +23,7 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/url/")
+@RequestMapping("/api/")
 @Tag(name = "登录接口")
 public class LoginController {
     private final UserService userService;
