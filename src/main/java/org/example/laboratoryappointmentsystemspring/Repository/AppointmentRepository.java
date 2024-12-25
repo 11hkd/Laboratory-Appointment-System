@@ -13,8 +13,7 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
     @Query("SELECT * from appointment where id=:appointmentId")
     public Appointment findByAppointmentId(Integer appointmentId);
 
-    // 注意表中字段并没有名为appointmentId的，应该是id字段作为主键自增，这里假设业务逻辑不需要传递id参数插入（由数据库自动生成）
-    @Modifying
+    // 添加预约信息
     @Transactional
     @Query("insert into appointment(uid, lid, cid, week, section, day_of_week, status, details) values(:uid, :lid, :cid, :week, :section, :day_of_week, :status, :details)")
     public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, String details);
