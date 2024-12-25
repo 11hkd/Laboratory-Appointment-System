@@ -1,6 +1,8 @@
 package org.example.laboratoryappointmentsystemspring.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,11 +24,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/url/")
+@Tag(name = "登录接口")
 public class LoginController {
     private final UserService userService;
     private final ObjectMapper objectMapper;
     private final JWTComponent jwtComponent;
-
+@Operation(summary = "登录接口")
     @PostMapping("login")
     public ResultVO login(@RequestBody Login login, HttpServletResponse resp) {
         User user = userService.findByAccount(login.getAccount());
