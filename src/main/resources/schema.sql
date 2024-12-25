@@ -1,6 +1,6 @@
 -- users表
 CREATE TABLE `users` (
-                         id INT PRIMARY KEY,
+                         id INT AUTO_INCREMENT PRIMARY KEY,
                          username VARCHAR(255) NOT NULL,
                          phone CHAR(11) NOT NULL,
                          account CHAR(10) NOT NULL UNIQUE,
