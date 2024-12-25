@@ -14,9 +14,12 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
     public Appointment findByAppointmentId(Integer appointmentId);
 
     // 添加预约信息
+    // 调整插入语句的字段与数据表中的字段对应，参数类型也需匹配数据表字段类型
+    @Modifying
     @Transactional
     @Query("insert into appointment(uid, lid, cid, week, section, day_of_week, status, details) values(:uid, :lid, :cid, :week, :section, :day_of_week, :status, :details)")
     public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, String details);
+
 
     // 删除预约信息
     // 参数类型改为Integer与表中id字段类型一致

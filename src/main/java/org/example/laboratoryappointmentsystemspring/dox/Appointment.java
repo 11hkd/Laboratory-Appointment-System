@@ -20,9 +20,9 @@ public class Appointment {
     private Integer uid;
     private Integer lid;
     private Integer cid;
-    private Byte week;
-    private Byte section;
-    private Byte day_of_week;
+    private Integer week;
+    private Integer section;
+    private Integer day_of_week;
     private String status;
     private String details;
     private Date insert_time;
