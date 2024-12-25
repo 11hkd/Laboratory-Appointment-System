@@ -1,6 +1,6 @@
 # -- 查询1：获取特定用户的所有课程
-# EXPLAIN SELECT * FROM courses
-#         WHERE uid = [特定用户ID];
+ EXPLAIN SELECT * FROM courses
+        WHERE uid =1;
 #
 # -- 查询2：获取特定实验室的所有预约
 # EXPLAIN SELECT * FROM appointment
