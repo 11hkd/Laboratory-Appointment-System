@@ -13,6 +13,7 @@ import org.example.laboratoryappointmentsystemspring.service.UserService;
 import org.example.laboratoryappointmentsystemspring.vo.ResultVO;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.example.laboratoryappointmentsystemspring.vo.ResultVO;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class LoginController {
     //    get请求，获取所有用户,当get/api/admin/users时，调用userService的listUsers方法，返回所有用户
     @Operation(summary = "获取所有用户", description = "获取所有用户")
     @GetMapping("getAllUsers")
-    public Object getUsers(){
+    public ResultVO getUsers(){
         return ResultVO.success(userService.getAllUser());
     }
     //接口层调用组件层的方法，返回用户

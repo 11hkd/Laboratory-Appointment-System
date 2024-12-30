@@ -28,7 +28,7 @@ public class UserController {
     // 添加预约信息
     @Operation(summary = "添加预约信息", description = "添加新的预约信息")
     @PostMapping("/appointments")
-    public ResponseEntity<ResultVO> addAppointment(@RequestParam Integer uid,
+    public ResultVO addAppointment(@RequestParam Integer uid,
                                                    @RequestParam Integer lid,
                                                    @RequestParam Integer cid,
                                                    @RequestParam Integer week,
@@ -37,58 +37,58 @@ public class UserController {
                                                    @RequestParam String status,
                                                    @RequestParam String details) {
         userService.addAppointment(uid, lid, cid, week, section, day_of_week, status, details);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ResultVO.ok());
+        return ResultVO.ok(userService.getAllUser());
     }
 
     // 删除预约信息
     @Operation(summary = "删除预约信息", description = "根据预约ID删除预约记录")
     @DeleteMapping("/appointments/{appointmentId}")
-    public ResponseEntity<ResultVO> deleteAppointment(@PathVariable Integer appointmentId) {
+    public ResultVO deleteAppointment(@PathVariable Integer appointmentId) {
         userService.deleteAppointment(appointmentId);
-        return ResponseEntity.ok(ResultVO.ok());
+        return ResultVO.ok(userService.getAllUser());
     }
 
     // 根据实验室名查找实验室
     @Operation(summary = "根据实验室名查找实验室", description = "根据传入的实验室名查找对应的实验室信息")
     @GetMapping("/labs/{labName}")
-    public ResponseEntity<ResultVO> findLabByName(@PathVariable String labName) {
+    public ResultVO findLabByName(@PathVariable String labName) {
         Lab lab = userService.findByLabName(labName);
         if (lab!= null) {
-            return ResponseEntity.ok(ResultVO.success(lab));
+            return ResultVO.success(lab);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应实验室信息"));
+        return ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应实验室信息");
     }
 
     // 根据账号获取用户信息
     @Operation(summary = "根据账号获取用户信息", description = "根据传入的账号查找对应的用户信息")
     @GetMapping("/{account}")
-    public ResponseEntity<ResultVO> findUserByAccount(@PathVariable String account) {
+    public ResultVO findUserByAccount(@PathVariable String account) {
         User user = userService.findByAccount(account);
         if (user!= null) {
-            return ResponseEntity.ok(ResultVO.success(user));
+            return ResultVO.success(user);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应用户信息"));
+        return ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应用户信息");
     }
 
     // 获取用户的课程列表
     @Operation(summary = "获取用户的课程列表", description = "根据传入的用户ID，获取该用户对应的课程列表信息")
     @GetMapping("/{userId}/courses")
-    public ResponseEntity<ResultVO> getUserCourses(@PathVariable Integer userId) {
+    public ResultVO getUserCourses(@PathVariable Integer userId) {
         List<Course> courses = userService.getUserCourses(userId);
         if (courses!= null &&!courses.isEmpty()) {
-            return ResponseEntity.ok(ResultVO.success(courses));
+            return ResultVO.success(courses);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到该用户的课程信息"));
+        return ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到该用户的课程信息");
     }
 
     // 获取用户的预约历史
     @Operation(summary = "获取用户的预约历史", description = "根据传入的用户ID，获取该用户的预约历史记录")
     @GetMapping("/{userId}/appointments")
-    public ResponseEntity<ResultVO> getUserAppointments(@PathVariable Integer userId) {
+    public ResultVO getUserAppointments(@PathVariable Integer userId) {
         List<Appointment> appointments = userService.getUserAppointments(userId);
         if (appointments!= null &&!appointments.isEmpty()) {
-            return ResponseEntity.ok(ResultVO.success(appointments));
+            return ResultVO.success(appointments);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到该用户的预约历史信息"));
+        return ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到该用户的预约历史信息");
     }
 }

@@ -6,6 +6,7 @@ import org.example.laboratoryappointmentsystemspring.dox.Course;
 import org.example.laboratoryappointmentsystemspring.dox.Lab;
 import org.example.laboratoryappointmentsystemspring.dox.User;
 import org.example.laboratoryappointmentsystemspring.service.AdminService;
+import org.example.laboratoryappointmentsystemspring.service.UserService;
 import org.example.laboratoryappointmentsystemspring.vo.ResultVO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,76 +18,84 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
 
     private final AdminService adminService;
+    private final UserService userService;
 
-    public AdminController(AdminService adminService) {
+    public AdminController(AdminService adminService, UserService userService) {
         this.adminService = adminService;
+        this.userService = userService;
+    }
+    // 返回所有用户信息
+    @Operation(summary = "获取所有用户", description = "获取所有用户")
+    @GetMapping("getAllUsers")
+    public ResultVO getUsers(){
+        return ResultVO.success(userService.getAllUser());
     }
 
     // 添加用户账号
     @Operation(summary = "添加用户账号", description = "添加新用户账号")
     @PostMapping("/users")
-    public ResponseEntity<ResultVO> addUser(@RequestParam String username,
+    public ResultVO addUser(@RequestParam String username,
                                             @RequestParam String password,
                                             @RequestParam String role,
                                             @RequestParam String phone,
                                             @RequestParam String account) {
         adminService.addUser(username, password, role, phone, account);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ResultVO.ok());
+        return ResultVO.ok(userService.getAllUser());
     }
 
     // 删除用户账号
     @Operation(summary = "删除用户账号", description = "根据用户名删除用户账号")
     @DeleteMapping("/users/{username}")
-    public ResponseEntity<ResultVO> deleteUser(@PathVariable String username) {
+    public ResultVO deleteUser(@PathVariable String username) {
         adminService.deleteUser(username);
-        return ResponseEntity.ok(ResultVO.ok());
+        return ResultVO.ok(userService.getAllUser());
     }
 
     // 查找用户账号
     @Operation(summary = "查找用户账号", description = "根据用户名查找用户账号")
     @GetMapping("/users/{username}")
-    public ResponseEntity<ResultVO> findUser(@PathVariable String username) {
+    public ResultVO findUser(@PathVariable String username) {
         User user = adminService.findUser(username);
         if (user!= null) {
-            return ResponseEntity.ok(ResultVO.success(user));
+            return ResultVO.success(user);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应用户账号"));
+        return ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应用户账号");
     }
 
     // 添加实验室信息
     @Operation(summary = "添加实验室信息", description = "添加新的实验室信息")
     @PostMapping("/labs")
-    public ResponseEntity<ResultVO> addLab(@RequestParam String labName,
+    public ResultVO addLab(@RequestParam String labName,
                                            @RequestParam String number,
                                            @RequestParam String information,
                                            @RequestParam String news) {
         adminService.addLab(labName, number, information, news);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ResultVO.ok());
+        return ResultVO.ok(userService.getAllUser());
     }
 
     // 删除实验室信息
     @Operation(summary = "删除实验室信息", description = "根据实验室名删除实验室信息")
     @DeleteMapping("/labs/{labName}")
-    public ResponseEntity<ResultVO> deleteLab(@PathVariable String labName) {
+    public ResultVO deleteLab(@PathVariable String labName) {
         adminService.deleteLab(labName);
-        return ResponseEntity.ok(ResultVO.ok());
+        return ResultVO.ok(userService.getAllUser());
     }
 
     // 查找实验室信息
     @Operation(summary = "查找实验室信息", description = "根据实验室名查找实验室信息")
     @GetMapping("/labs/{labName}")
-    public ResponseEntity<ResultVO> findLab(@PathVariable String labName) {
+    public ResultVO findLab(@PathVariable String labName) {
         Lab lab = adminService.findLab(labName);
         if (lab!= null) {
-            return ResponseEntity.ok(ResultVO.success(lab));
+            return ResultVO.success(lab);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应实验室信息"));
+        return ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应实验室信息");
     }
 
     // 添加课程信息
     @Operation(summary = "添加课程信息", description = "添加新的课程信息")
     @PostMapping("/courses")
-    public ResponseEntity<ResultVO> addCourse(@RequestParam Integer uid,
+    public ResultVO addCourse(@RequestParam Integer uid,
                                               @RequestParam Integer lid,
                                               @RequestParam Integer count,
                                               @RequestParam String courseName,
@@ -94,25 +103,25 @@ public class AdminController {
                                               @RequestParam String week,
                                               @RequestParam String time) {
         adminService.addCourse(uid, lid, count, courseName, information, week, time);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ResultVO.ok());
+        return ResultVO.ok(userService.getAllUser());
     }
 
     // 删除课程信息
     @Operation(summary = "删除课程信息", description = "根据课程名删除课程信息")
     @DeleteMapping("/courses/{courseName}")
-    public ResponseEntity<ResultVO> deleteCourse(@PathVariable String courseName) {
+    public ResultVO deleteCourse(@PathVariable String courseName) {
         adminService.deleteCourse(courseName);
-        return ResponseEntity.ok(ResultVO.ok());
+        return ResultVO.ok(userService.getAllUser());
     }
 
     // 查找课程信息
     @Operation(summary = "查找课程信息", description = "根据课程名查找课程信息")
     @GetMapping("/courses/{courseName}")
-    public ResponseEntity<ResultVO> findCourse(@PathVariable String courseName) {
+    public ResultVO findCourse(@PathVariable String courseName) {
         Course course = adminService.findCourse(courseName);
         if (course!= null) {
-            return ResponseEntity.ok(ResultVO.success(course));
+            return ResultVO.success(course);
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应课程信息"));
+        return ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应课程信息");
     }
 }

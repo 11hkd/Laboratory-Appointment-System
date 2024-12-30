@@ -5,7 +5,10 @@ import lombok.Builder;
 //import org.example.graduatemanage.exception.Code;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.laboratoryappointmentsystemspring.dox.User;
 import org.example.laboratoryappointmentsystemspring.exception.Code;
+
+import java.util.List;
 
 //import org.example.graduatemanage.exception.Code;
 @Data
@@ -23,7 +26,7 @@ public class ResultVO {
             .timestamp(System.currentTimeMillis())
             .build();
     //每次请求的不必都创建对象 所以构建一个ResultVO对象做一个缓存 不必每次都创建
-    public static ResultVO ok(){
+    public static ResultVO ok(List<User> allUser){
         return EMPTY;
     }
     public static ResultVO success(Object data){
