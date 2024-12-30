@@ -12,46 +12,29 @@ import org.example.laboratoryappointmentsystemspring.dox.User;
 import org.example.laboratoryappointmentsystemspring.service.UserService;
 import org.example.laboratoryappointmentsystemspring.vo.ResultVO;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-@RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/")
-@Tag(name = "登录接口")
+@RequiredArgsConstructor
+@RequestMapping("/api/login/")
 public class LoginController {
     private final UserService userService;
-    private final ObjectMapper objectMapper;
-    private final JWTComponent jwtComponent;
-@Operation(summary = "登录接口")
-    @PostMapping("login")
-    public ResultVO login(@RequestBody Login login, HttpServletResponse resp) {
-        User user = userService.findByAccount(login.getAccount());
 
-        if (user == null || (login.getPassword()).equals(user.getPassword())) {
-            return ResultVO.error(401, "用户名或密码错误");
-        }
-
-        // 使用HashMap来创建Map实例并添加键值对，替代Map.of方法
-        Map<String, Object> map = new HashMap<>();
-        map.put("uid", user.getId());
-        map.put("role", user.getRole());
-        // 这里原代码中"depId"没有对应的值，如果需要可以补充正确逻辑获取对应值后添加，这里先按原样添加键
-        map.put("depId", null);
-
-        String jwt = jwtComponent.encode(map);
-        resp.addHeader("token", jwt);
-        resp.addHeader("role", user.getRole());
-
-        // 同样使用HashMap来创建返回的Map实例
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("user", user);
-        return ResultVO.success(resultMap);
+    //    get请求，获取所有用户,当get/api/admin/users时，调用userService的listUsers方法，返回所有用户
+    @Operation(summary = "获取所有用户", description = "获取所有用户")
+    @GetMapping("getAllUsers")
+    public Object getUsers(){
+        return ResultVO.success(userService.getAllUser());
+    }
+    //接口层调用组件层的方法，返回用户
+    @Operation(summary = "根据账号拿用户", description = "根据账号拿用户")
+    @GetMapping("user/{account}")
+//    传一个可变参数，获取用户，当get/api/admin/user/1001时，调用userService的getUserByAccount方法，返回用户
+    public ResultVO getUser(@PathVariable String account){
+        return ResultVO.success(userService.findByAccount(account));
     }
 }

@@ -70,4 +70,9 @@ public class AdminService {
     public Course findCourse(String courseName) {
         return courseRepository.findByCourseName(courseName);
     }
+
+    //更新公告信息
+    public void updateNews(String labName, String news) {
+        labRepository.updateNews(labName, news);
+    }
 }
