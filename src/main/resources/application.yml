@@ -4,7 +4,7 @@ spring:
     username: 2022212825
     password: 2022212825
     hikari:
-      maximum-pool-size: 1
+      maximum-pool-size: 2
   #      限制数据库最大连接数
   sql:
     init:
@@ -17,3 +17,6 @@ logging:
       example: debug
   pattern:
     console: '%-5level %C.%M[%line] - %msg%n'
+server:
+    port: 8080
+

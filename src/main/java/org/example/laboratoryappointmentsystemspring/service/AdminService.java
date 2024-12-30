@@ -21,8 +21,8 @@ public class AdminService {
     private final UserRepository userRepository;
 
     // 添加用户账号（根据更新后的UserRepository.addUser方法调整参数传递，返回值设为void符合插入操作逻辑）
-    public void addUser(String username, String password, String role, String phone, String account) {
-        userRepository.addUser(username, phone, account, password, role);
+    public void addUser(String username, String account,String password, String role, String phone) {
+        userRepository.addUser(username, account, password, role,phone);
     }
 
     // 删除用户账号（调用UserRepository.deleteByUsername方法，参数传递正确，返回值为void符合删除操作）

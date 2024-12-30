@@ -23,8 +23,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     // 添加用户
     @Modifying
     @Transactional
-    @Query("insert into users(username, phone, account, password, role) values(:username, :phone, :account, :password, :role)")
-    public void addUser(String username, String phone, String account, String password, String role);
+    @Query("insert into users(username, account, password, role,phone) values(:username, :account, :password, :role, :phone)")
+    public void addUser(String username ,String account, String password, String role,String phone);
 
     // 删除用户
     @Modifying

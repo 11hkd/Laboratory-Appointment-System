@@ -21,10 +21,10 @@ public class User {
     public static final String TEACHER_ROLE = "race";
     private String id;
     private String username;
-    private String password;
-    private String phone;
     private String account;
+    private String password;
     private String role;
+    private String phone;
     private Data inset_time;
     private Data update_time;
 
