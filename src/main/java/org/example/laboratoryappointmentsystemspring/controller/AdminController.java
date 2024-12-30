@@ -2,6 +2,7 @@ package org.example.laboratoryappointmentsystemspring.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.example.laboratoryappointmentsystemspring.dox.Course;
 import org.example.laboratoryappointmentsystemspring.dox.Lab;
 import org.example.laboratoryappointmentsystemspring.dox.User;
@@ -19,9 +20,9 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "管理员接口")
 public class AdminController {
 
-    private final AdminService adminService;
-    private final UserService userService;
-    private final PathMatcher pathMatcher;
+    private  AdminService adminService;
+    private  UserService userService;
+    private  PathMatcher pathMatcher;
 
     public AdminController(AdminService adminService, UserService userService, PathMatcher pathMatcher) {
         this.adminService = adminService;
