@@ -25,11 +25,13 @@ public class LoginController {
     private final UserService userService;
 
     //    get请求，获取所有用户,当get/api/admin/users时，调用userService的listUsers方法，返回所有用户
-    @GetMapping("users")
+    @Operation(summary = "获取所有用户", description = "获取所有用户")
+    @GetMapping("getAllUsers")
     public Object getUsers(){
         return ResultVO.success(userService.getAllUser());
     }
     //接口层调用组件层的方法，返回用户
+    @Operation(summary = "根据账号拿用户", description = "根据账号拿用户")
     @GetMapping("user/{account}")
 //    传一个可变参数，获取用户，当get/api/admin/user/1001时，调用userService的getUserByAccount方法，返回用户
     public ResultVO getUser(@PathVariable String account){
