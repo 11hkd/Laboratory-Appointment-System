@@ -2,6 +2,7 @@ package org.example.laboratoryappointmentsystemspring.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.websocket.server.PathParam;
 import org.example.laboratoryappointmentsystemspring.dox.Course;
 import org.example.laboratoryappointmentsystemspring.dox.Lab;
 import org.example.laboratoryappointmentsystemspring.dox.User;
@@ -10,6 +11,7 @@ import org.example.laboratoryappointmentsystemspring.service.UserService;
 import org.example.laboratoryappointmentsystemspring.vo.ResultVO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.PathMatcher;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,10 +21,12 @@ public class AdminController {
 
     private final AdminService adminService;
     private final UserService userService;
+    private final PathMatcher pathMatcher;
 
-    public AdminController(AdminService adminService, UserService userService) {
+    public AdminController(AdminService adminService, UserService userService, PathMatcher pathMatcher) {
         this.adminService = adminService;
         this.userService = userService;
+        this.pathMatcher = pathMatcher;
     }
 
     // 返回所有用户信息
@@ -35,12 +39,8 @@ public class AdminController {
     // 添加用户账号
     @Operation(summary = "添加用户账号并返回所有信息", description = "添加新用户账号")
     @PostMapping("/users")
-    public ResultVO addUser(@RequestParam String username,
-                                            @RequestParam String password,
-                                            @RequestParam String role,
-                                            @RequestParam String phone,
-                                            @RequestParam String account) {
-        adminService.addUser(username, password, role, phone, account);
+    public ResultVO addUser(@RequestBody User user) {
+        adminService.addUser(user.getUsername(), user.getPassword(),user.getRole(), user.getPhone(), user.getAccount());
         return ResultVO.success(adminService.findAllUser());
     }
 
@@ -66,11 +66,8 @@ public class AdminController {
     // 添加实验室信息
     @Operation(summary = "添加实验室信息并返回所有信息", description = "添加新的实验室信息")
     @PostMapping("/labs")
-    public ResultVO addLab(@RequestParam String labName,
-                                           @RequestParam String number,
-                                           @RequestParam String information,
-                                           @RequestParam String news) {
-        adminService.addLab(labName, number, information, news);
+    public ResultVO addLab(@RequestBody Lab lab) {
+        adminService.addLab(lab.getName(), String.valueOf(lab.getNumber()), lab.getInformation(),lab.getNews());
         return ResultVO.success(adminService.findAllLab());
     }
 
@@ -96,14 +93,8 @@ public class AdminController {
     // 添加课程信息
     @Operation(summary = "添加课程信息并返回所有信息", description = "添加新的课程信息")
     @PostMapping("/courses")
-    public ResultVO addCourse(@RequestParam Integer uid,
-                                              @RequestParam Integer lid,
-                                              @RequestParam Integer count,
-                                              @RequestParam String courseName,
-                                              @RequestParam String information,
-                                              @RequestParam String week,
-                                              @RequestParam String time) {
-        adminService.addCourse(uid, lid, count, courseName, information, week, time);
+    public ResultVO addCourse(@RequestBody Course course) {
+        adminService.addCourse(course.getUid(), course.getLid(), course.getCount(), String.valueOf(course.getCount()), course.getInformation(), course.getWeek(), course.getTime());
         return ResultVO.success(adminService.findAllCourse());
     }
 
@@ -128,8 +119,8 @@ public class AdminController {
 
     // 更新实验室公告
     @Operation(summary = "更新实验室公告", description = "根据实验室名更新实验室公告")
-    @PutMapping("/labs/{labName}")
-    public ResultVO updateNews(@PathVariable String labName, @RequestParam String news) {
+    @PostMapping("/labs/{labName}")
+    public ResultVO updateNews(@PathVariable String labName, @RequestBody String news) {
         adminService.updateNews(labName, news);
         return ResultVO.success(adminService.findLab(labName));
     }
