@@ -60,4 +60,8 @@ public class UserService {
     public List<Appointment> getUserAppointments(Integer userId) {
     return (List<Appointment>) appointmentRepository.findByUid(userId);
     }
+    //直接获取所有用户
+    public List<User> getAllUser(){
+        return (List<User>) userRepository.findAll();
+    }
 }

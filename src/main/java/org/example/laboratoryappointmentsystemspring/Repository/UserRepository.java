@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -34,4 +35,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     // 根据账号Account获取用户
     @Query("SELECT * from users where account=:account")
     public User findByAccount(String account);
+
+    //直接获取所有用户
+    @Query("SELECT * from users")
+    public List<User> findAll();
 }
