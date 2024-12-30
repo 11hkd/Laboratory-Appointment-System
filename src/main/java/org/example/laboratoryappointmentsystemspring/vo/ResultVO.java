@@ -5,6 +5,8 @@ import lombok.Builder;
 //import org.example.graduatemanage.exception.Code;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.laboratoryappointmentsystemspring.exception.Code;
+
 //import org.example.graduatemanage.exception.Code;
 @Data
 @Builder
@@ -40,13 +42,13 @@ public class ResultVO {
                 .build();
     }
 
-//    //当存在通用异常码的时候
-//    public static ResultVO error(Code code){
-//        return ResultVO.builder().code(code.getCode())
-//                .timestamp(System.currentTimeMillis())
-//                .message(code.getMessage()).
-//                build();
-//    }
+
+    public static ResultVO error(Code code){//存在通用异常码的时候
+        return ResultVO.builder().code(code.getCode())
+                .timestamp(System.currentTimeMillis())
+                .message(code.getMessage()).
+                build();
+    }
 
     //不存在通用异常码的时候
     public static ResultVO error(int code,String message){
