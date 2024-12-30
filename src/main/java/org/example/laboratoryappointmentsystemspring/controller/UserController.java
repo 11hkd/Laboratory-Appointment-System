@@ -26,7 +26,7 @@ public class UserController {
     }
 
     // 添加预约信息
-    @Operation(summary = "添加预约信息", description = "添加新的预约信息")
+    @Operation(summary = "添加预约信息并返回所有用户信息", description = "添加新的预约信息")
     @PostMapping("/appointments")
     public ResultVO addAppointment(@RequestParam Integer uid,
                                                    @RequestParam Integer lid,
@@ -37,15 +37,15 @@ public class UserController {
                                                    @RequestParam String status,
                                                    @RequestParam String details) {
         userService.addAppointment(uid, lid, cid, week, section, day_of_week, status, details);
-        return ResultVO.ok(userService.getAllUser());
+        return ResultVO.success(userService.getUserAppointments(uid));
     }
 
     // 删除预约信息
-    @Operation(summary = "删除预约信息", description = "根据预约ID删除预约记录")
+    @Operation(summary = "删除预约信息并返回所有信息", description = "根据预约ID删除预约记录")
     @DeleteMapping("/appointments/{appointmentId}")
     public ResultVO deleteAppointment(@PathVariable Integer appointmentId) {
         userService.deleteAppointment(appointmentId);
-        return ResultVO.ok(userService.getAllUser());
+        return ResultVO.success(userService.getUserAppointments(appointmentId));
     }
 
     // 根据实验室名查找实验室

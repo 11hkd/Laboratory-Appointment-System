@@ -49,8 +49,6 @@ public class UserService {
         return userRepository.findByAccount(account);
     }
 
-    // 以下可以根据业务需求添加更多与用户相关的服务方法，比如查找用户课程列表、获取用户预约历史等，以下是简单示例
-
     // 获取用户的课程列表（假设通过用户id关联查询课程，需要根据实际业务逻辑和数据表关联关系完善）
     public List<Course> getUserCourses(Integer userId) {
         return (List<Course>) courseRepository.findByUid(userId);
@@ -60,8 +58,5 @@ public class UserService {
     public List<Appointment> getUserAppointments(Integer userId) {
     return (List<Appointment>) appointmentRepository.findByUid(userId);
     }
-    //直接获取所有用户
-    public List<User> getAllUser(){
-        return (List<User>) userRepository.findAll();
-    }
+
 }

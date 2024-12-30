@@ -24,15 +24,16 @@ public class AdminController {
         this.adminService = adminService;
         this.userService = userService;
     }
+
     // 返回所有用户信息
     @Operation(summary = "获取所有用户", description = "获取所有用户")
     @GetMapping("getAllUsers")
     public ResultVO getUsers(){
-        return ResultVO.success(userService.getAllUser());
+        return ResultVO.success(adminService.findAllUser());
     }
 
     // 添加用户账号
-    @Operation(summary = "添加用户账号", description = "添加新用户账号")
+    @Operation(summary = "添加用户账号并返回所有信息", description = "添加新用户账号")
     @PostMapping("/users")
     public ResultVO addUser(@RequestParam String username,
                                             @RequestParam String password,
@@ -40,15 +41,15 @@ public class AdminController {
                                             @RequestParam String phone,
                                             @RequestParam String account) {
         adminService.addUser(username, password, role, phone, account);
-        return ResultVO.ok(userService.getAllUser());
+        return ResultVO.success(adminService.findAllUser());
     }
 
     // 删除用户账号
-    @Operation(summary = "删除用户账号", description = "根据用户名删除用户账号")
+    @Operation(summary = "删除用户账号并返回所有信息", description = "根据用户名删除用户账号")
     @DeleteMapping("/users/{username}")
     public ResultVO deleteUser(@PathVariable String username) {
         adminService.deleteUser(username);
-        return ResultVO.ok(userService.getAllUser());
+        return ResultVO.success(adminService.findAllUser());
     }
 
     // 查找用户账号
@@ -63,22 +64,22 @@ public class AdminController {
     }
 
     // 添加实验室信息
-    @Operation(summary = "添加实验室信息", description = "添加新的实验室信息")
+    @Operation(summary = "添加实验室信息并返回所有信息", description = "添加新的实验室信息")
     @PostMapping("/labs")
     public ResultVO addLab(@RequestParam String labName,
                                            @RequestParam String number,
                                            @RequestParam String information,
                                            @RequestParam String news) {
         adminService.addLab(labName, number, information, news);
-        return ResultVO.ok(userService.getAllUser());
+        return ResultVO.success(adminService.findAllLab());
     }
 
     // 删除实验室信息
-    @Operation(summary = "删除实验室信息", description = "根据实验室名删除实验室信息")
+    @Operation(summary = "删除实验室信息并返回所有信息", description = "根据实验室名删除实验室信息")
     @DeleteMapping("/labs/{labName}")
     public ResultVO deleteLab(@PathVariable String labName) {
         adminService.deleteLab(labName);
-        return ResultVO.ok(userService.getAllUser());
+        return ResultVO.success(adminService.findAllLab());
     }
 
     // 查找实验室信息
@@ -93,7 +94,7 @@ public class AdminController {
     }
 
     // 添加课程信息
-    @Operation(summary = "添加课程信息", description = "添加新的课程信息")
+    @Operation(summary = "添加课程信息并返回所有信息", description = "添加新的课程信息")
     @PostMapping("/courses")
     public ResultVO addCourse(@RequestParam Integer uid,
                                               @RequestParam Integer lid,
@@ -103,15 +104,15 @@ public class AdminController {
                                               @RequestParam String week,
                                               @RequestParam String time) {
         adminService.addCourse(uid, lid, count, courseName, information, week, time);
-        return ResultVO.ok(userService.getAllUser());
+        return ResultVO.success(adminService.findAllCourse());
     }
 
     // 删除课程信息
-    @Operation(summary = "删除课程信息", description = "根据课程名删除课程信息")
+    @Operation(summary = "删除课程信息并返回所有信息", description = "根据课程名删除课程信息")
     @DeleteMapping("/courses/{courseName}")
     public ResultVO deleteCourse(@PathVariable String courseName) {
         adminService.deleteCourse(courseName);
-        return ResultVO.ok(userService.getAllUser());
+        return ResultVO.success(adminService.findAllCourse());
     }
 
     // 查找课程信息
@@ -123,5 +124,13 @@ public class AdminController {
             return ResultVO.success(course);
         }
         return ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应课程信息");
+    }
+
+    // 更新实验室公告
+    @Operation(summary = "更新实验室公告", description = "根据实验室名更新实验室公告")
+    @PutMapping("/labs/{labName}")
+    public ResultVO updateNews(@PathVariable String labName, @RequestParam String news) {
+        adminService.updateNews(labName, news);
+        return ResultVO.success(adminService.findLab(labName));
     }
 }

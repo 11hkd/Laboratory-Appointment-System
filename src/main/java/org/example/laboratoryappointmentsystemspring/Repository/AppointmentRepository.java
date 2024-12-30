@@ -33,4 +33,10 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
     @Query("SELECT * from appointment where uid=:uid")
     //这里返回值类型应该是List<Appointment>，因为一个用户可能有多条预约记录
     List<Appointment> findByUid(Integer uid);
+
+    //直接获得所有预约信息
+    @Query("SELECT * from appointment")
+    List<Appointment> findAllAppointments();
+
+
 }

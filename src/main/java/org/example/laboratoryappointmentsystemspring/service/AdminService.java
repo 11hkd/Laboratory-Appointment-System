@@ -32,7 +32,7 @@ public class AdminService {
 
 //返回所有用户信息
     public Iterable<User> findAllUser() {
-        return userRepository.findAll();
+        return userRepository.findAllUser();
     }
 
     // 查找用户账号（调用UserRepository.findByUsername方法，返回查找到的User对象，方便后续业务逻辑使用）
@@ -50,11 +50,14 @@ public class AdminService {
         labRepository.deleteByLabName(labName);
     }
 
-
-
     // 查找实验室信息（调用LabRepository.findByLabName方法，返回Lab对象便于后续业务使用）
     public Lab findLab(String labName) {
         return labRepository.findByLabName(labName);
+    }
+
+    //获取所有实验室信息
+    public Iterable<Lab> findAllLab() {
+        return labRepository.findAllLabs();
     }
 
     // 以下可以根据业务需求添加更多管理员相关的操作方法，比如管理课程信息、管理预约信息等，以下是简单示例
@@ -72,6 +75,11 @@ public class AdminService {
     // 查找课程信息（调用CourseRepository.findByCourseName方法，返回查找到的Course对象供后续业务使用）
     public Course findCourse(String courseName) {
         return courseRepository.findByCourseName(courseName);
+    }
+
+    //获取所有课程信息
+    public Iterable<Course> findAllCourse() {
+        return courseRepository.findAllCourses();
     }
 
     //更新公告信息

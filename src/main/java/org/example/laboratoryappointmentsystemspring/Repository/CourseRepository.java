@@ -33,5 +33,10 @@ public interface CourseRepository extends CrudRepository<Course, Integer> {
     @Query("SELECT * from courses where uid=:uid")
     List<Course> findByUid(Integer uid);
 
+    // 查看所有课程信息
+    @Query("SELECT * from courses")
+    public List<Course> findAllCourses();
+
+
 
 }
