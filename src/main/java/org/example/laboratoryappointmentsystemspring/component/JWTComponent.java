@@ -15,9 +15,6 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.Map;
 
-
-
-
 @Component
 public class JWTComponent {
     //引入algorithm中的HMAC256算法

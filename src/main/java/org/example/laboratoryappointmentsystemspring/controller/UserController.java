@@ -28,16 +28,9 @@ public class UserController {
     // 添加预约信息
     @Operation(summary = "添加预约信息并返回所有用户信息", description = "添加新的预约信息")
     @PostMapping("/appointments")
-    public ResultVO addAppointment(@RequestParam Integer uid,
-                                                   @RequestParam Integer lid,
-                                                   @RequestParam Integer cid,
-                                                   @RequestParam Integer week,
-                                                   @RequestParam Integer section,
-                                                   @RequestParam Integer day_of_week,
-                                                   @RequestParam String status,
-                                                   @RequestParam String details) {
-        userService.addAppointment(uid, lid, cid, week, section, day_of_week, status, details);
-        return ResultVO.success(userService.getUserAppointments(uid));
+    public ResultVO addAppointment(@RequestBody Appointment appointment) {
+        userService.addAppointment(appointment.getUid(), appointment.getLid(), appointment.getCid(), appointment.getWeek(), appointment.getSection(), appointment.getDay_of_week(), appointment.getStatus(), appointment.getDetails());
+        return ResultVO.success(userService.getUserAppointments(appointment.getUid()));
     }
 
     // 删除预约信息
