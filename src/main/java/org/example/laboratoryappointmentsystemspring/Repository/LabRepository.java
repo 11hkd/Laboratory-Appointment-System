@@ -30,7 +30,7 @@ public interface LabRepository extends CrudRepository<Lab, Integer> {
     // 查看所有实验室信息
     @Query("SELECT * from labs")
     public List<Lab> findAllLabs();
-//    1
+//    11
 
     // 更新公告信息
     @Modifying
