@@ -2,8 +2,6 @@ package org.example.laboratoryappointmentsystemspring.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.websocket.server.PathParam;
-import lombok.extern.slf4j.Slf4j;
 import org.example.laboratoryappointmentsystemspring.dox.Course;
 import org.example.laboratoryappointmentsystemspring.dox.Lab;
 import org.example.laboratoryappointmentsystemspring.dox.User;
@@ -41,10 +39,12 @@ public class AdminController {
     // 添加用户账号
     @Operation(summary = "添加用户账号并返回所有信息", description = "添加新用户账号")
     @PostMapping("/users")
-    public ResultVO addUser(@RequestBody User user) {
-        adminService.addUser(user.getUsername(), user.getAccount(),user.getPassword(),user.getRole(), user.getPhone());
-        //在日志输出("添加用户账号成功,账号名为{}",user.getUsername());
-        log.info("添加用户账号成功,账号名为{}",user.getUsername());
+    public ResultVO addUser(@RequestParam String username,
+                                            @RequestParam String password,
+                                            @RequestParam String role,
+                                            @RequestParam String phone,
+                                            @RequestParam String account) {
+        adminService.addUser(username, password, role, phone, account);
         return ResultVO.success(adminService.findAllUser());
     }
 
