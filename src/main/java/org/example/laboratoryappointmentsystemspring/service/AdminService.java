@@ -30,7 +30,10 @@ public class AdminService {
         userRepository.deleteByUsername(username);
     }
 
-
+//返回所有用户信息
+    public Iterable<User> findAllUser() {
+        return userRepository.findAll();
+    }
 
     // 查找用户账号（调用UserRepository.findByUsername方法，返回查找到的User对象，方便后续业务逻辑使用）
     public User findUser(String username) {

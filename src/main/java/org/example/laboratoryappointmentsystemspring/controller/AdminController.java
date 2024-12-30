@@ -115,14 +115,4 @@ public class AdminController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到对应课程信息"));
     }
-
-    //更新公告信息
-    @Operation(summary = "更新公告信息", description = "根据实验室名更新公告信息")
-    @PostMapping("/labs/news")
-    public ResponseEntity<ResultVO> updateNews(@RequestParam String labName,
-                                               @RequestParam String news) {
-        adminService.updateNews(labName, news);
-        return ResponseEntity.ok(ResultVO.ok());
-    }
-
 }

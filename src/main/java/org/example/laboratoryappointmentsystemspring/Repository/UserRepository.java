@@ -38,5 +38,5 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
     //直接获取所有用户
     @Query("SELECT * from users")
-    public List<User> findAll();
+    public List<User> findAllUser();
 }
