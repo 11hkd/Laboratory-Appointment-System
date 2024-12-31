@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.Id;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -25,7 +26,7 @@ public class Appointment {
     private Integer day_of_week;
     private String status;
     private String details;
-    private Date insert_time;
-    private Date update_time;
+    private LocalDateTime insert_time;
+    private LocalDateTime update_time;
 //    1
 }

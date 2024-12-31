@@ -39,13 +39,9 @@ public class AdminController {
 
     // 添加用户账号
     @Operation(summary = "添加用户账号并返回所有信息", description = "添加新用户账号")
-    @PostMapping("/users")
-    public ResultVO addUser(@RequestParam String username,
-                                            @RequestParam String password,
-                                            @RequestParam String role,
-                                            @RequestParam String phone,
-                                            @RequestParam String account) {
-        adminService.addUser(username, password, role, phone, account);
+    @PostMapping(value = "/users")
+    public ResultVO addUser(@RequestBody User user) {
+        adminService.addUser(user.getAccount(),user.getUsername(), user.getPassword(),user.getRole(),user.getPhone());
         return ResultVO.success(adminService.findAllUser());
     }
 
@@ -72,7 +68,7 @@ public class AdminController {
     @Operation(summary = "添加实验室信息并返回所有信息", description = "添加新的实验室信息")
     @PostMapping("/labs")
     public ResultVO addLab(@RequestBody Lab lab) {
-        adminService.addLab(lab.getName(), String.valueOf(lab.getNumber()), lab.getInformation(),lab.getNews());
+        adminService.addLab(lab.getName(),lab.getNumber(), lab.getInformation(),lab.getNews());
         return ResultVO.success(adminService.findAllLab());
     }
 

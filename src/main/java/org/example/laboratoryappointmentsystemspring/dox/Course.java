@@ -8,6 +8,7 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -26,6 +27,6 @@ public class Course {
     private String information; // JSON格式数据在Java中可以用String类型先接收，后续按需处理
     private String week;
     private String time;
-    private Date insert_time;
-    private Date update_time;
+    private LocalDateTime insert_time;
+    private LocalDateTime update_time;
 }

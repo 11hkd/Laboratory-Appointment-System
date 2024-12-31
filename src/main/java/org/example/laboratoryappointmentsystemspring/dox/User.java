@@ -8,12 +8,17 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.io.DataInput;
+import java.io.Serializable;
+import java.sql.Date;
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table("user")//指定表名
-public class User {
+public class User implements Serializable {
     @Id
     @CreatedBy
     public static final String SUPPERADMIN_ROLE = "bala";
@@ -25,7 +30,7 @@ public class User {
     private String password;
     private String role;
     private String phone;
-    private Data inset_time;
-    private Data update_time;
+    private LocalDateTime inset_time;
+    private LocalDateTime update_time;
 
 }

@@ -18,8 +18,8 @@ public interface LabRepository extends CrudRepository<Lab, Integer> {
     // 添加实验室信息
     @Modifying
     @Transactional
-    @Query("insert into labs(number, information, news, name) values(:number, :information, :news, :labName)")
-    public void addLab(Integer number, String information, String news, String labName);
+    @Query("insert into labs(name,number,information, news) values(:labName,:number, :information, :news)")
+    public void addLab(String labName,Integer number, String information, String news);
 
     // 删除实验室信息
     @Modifying
