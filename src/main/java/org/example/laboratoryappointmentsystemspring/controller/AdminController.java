@@ -125,4 +125,11 @@ public class AdminController {
         adminService.updateNews(labName, news);
         return ResultVO.success(adminService.findLab(labName));
     }
+
+    //获取所有实验室信息
+    @Operation(summary = "获取所有实验室信息", description = "获取所有实验室信息")
+    @GetMapping("getAllLabs")
+    public ResultVO getLabs(){
+        return ResultVO.success(adminService.findAllLab());
+    }
 }

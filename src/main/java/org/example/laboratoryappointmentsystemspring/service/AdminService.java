@@ -11,6 +11,8 @@ import org.example.laboratoryappointmentsystemspring.dox.Lab;
 import org.example.laboratoryappointmentsystemspring.dox.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class AdminService {
@@ -86,4 +88,5 @@ public class AdminService {
     public void updateNews(String labName, String news) {
         labRepository.updateNews(labName, news);
     }
+
 }
