@@ -47,7 +47,7 @@ public class AdminController {
 
     // 删除用户账号
     @Operation(summary = "删除用户账号并返回所有信息", description = "根据用户名删除用户账号")
-    @DeleteMapping("users/{username}")
+    @DeleteMapping("deleteUser/{username}")
     public ResultVO deleteUser(@PathVariable String username) {
         adminService.deleteUser(username);
         return ResultVO.success(adminService.findAllUser());
