@@ -41,6 +41,6 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     public List<User> findAllUser();
 
     //根据传来的账号密码返回用户
-    @Query("SELECT * from users where account=:account and password=:password")
-    public User findByAccountAndPassword(String account, String password);
+    @Query("SELECT account from users where account=:account and password=:password")
+    public String findByAccountAndPassword(String account, String password);
 }

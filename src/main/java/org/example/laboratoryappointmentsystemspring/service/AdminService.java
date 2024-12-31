@@ -91,7 +91,7 @@ public class AdminService {
     }
 
     //根据用户账号查找
-    public User findByAccountAndPassword(String account ,String password) {
+    public String findByAccountAndPassword(String account ,String password) {
         return userRepository.findByAccountAndPassword(account,password);
     }
 
