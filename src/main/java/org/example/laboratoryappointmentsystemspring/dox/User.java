@@ -7,17 +7,17 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.stereotype.Component;
 
 import java.io.DataInput;
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("user")//指定表名
+@Component
 public class User implements Serializable {
     @Id
     @CreatedBy

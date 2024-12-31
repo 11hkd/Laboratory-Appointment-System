@@ -30,13 +30,14 @@ private final AdminService adminService;
     @Operation(summary = "获取所有用户", description = "获取所有用户")
     @GetMapping("getAllUsers")
     public ResultVO getUsers(){
+        log.info("获取所有用户{}",adminService.findAllUser());
         return ResultVO.success(adminService.findAllUser());
     }
     //接口层调用组件层的方法，返回用户
-    @Operation(summary = "根据账号拿用户", description = "根据账号拿用户")
+    @Operation(summary = "根据账号密码拿用户", description = "根据账号密码拿用户")
     @GetMapping("user/{account}")
-//    传一个可变参数，获取用户，当get/api/admin/user/1001时，调用userService的getUserByAccount方法，返回用户
-    public ResultVO getUser(@PathVariable String account){
-        return ResultVO.success(adminService.findUser(account));
+    public ResultVO getUser(@RequestBody Login login){
+        log.info("login:{}",login);
+        return ResultVO.success(adminService.findByAccountAndPassword(login.getAccount(), login.getPassword()));
     }
 }

@@ -43,8 +43,8 @@ public class AdminService {
     }
 
     // 添加实验室信息（依据LabRepository.addLab方法的参数要求传递参数，返回值为void，执行插入操作）
-    public void addLab(String labName, int number, String information, String news) {
-        labRepository.addLab(labName,number, information, news);
+    public void addLab(String name, int number, String information, String news) {
+        labRepository.addLab(name,number, information, news);
     }
 
     // 删除实验室信息（调用LabRepository.deleteByLabName方法，正确传递参数，返回值为void执行删除）
@@ -87,6 +87,11 @@ public class AdminService {
     //更新公告信息
     public void updateNews(String labName, String news) {
         labRepository.updateNews(labName, news);
+    }
+
+    //根据用户账号查找
+    public User findByAccountAndPassword(String account ,String password) {
+        return userRepository.findByAccountAndPassword(account,password);
     }
 
 }
