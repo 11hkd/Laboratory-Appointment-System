@@ -22,7 +22,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/login/")
+@RequestMapping("/api/")
 public class LoginController {
     private final UserService userService;
 private final AdminService adminService;
@@ -35,7 +35,7 @@ private final AdminService adminService;
     }
     //接口层调用组件层的方法，返回用户
     @Operation(summary = "根据账号密码拿用户", description = "根据账号密码拿用户")
-    @GetMapping("user/{account}")
+    @GetMapping("login")
     public ResultVO getUser(@RequestBody Login login){
         log.info("login:{}",login);
         return ResultVO.success(adminService.findByAccountAndPassword(login.getAccount(), login.getPassword()));

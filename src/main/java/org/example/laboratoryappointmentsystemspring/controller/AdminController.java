@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/admins")
+@RequestMapping("/api/admins/")
 @Tag(name = "管理员接口")
 public class AdminController {
 
@@ -39,7 +39,7 @@ public class AdminController {
 
     // 添加用户账号
     @Operation(summary = "添加用户账号并返回所有信息", description = "添加新用户账号")
-    @PostMapping(value = "/users")
+    @PostMapping(value = "users")
     public ResultVO addUser(@RequestBody User user) {
         adminService.addUser(user.getAccount(),user.getUsername(), user.getPassword(),user.getRole(),user.getPhone());
         return ResultVO.success(adminService.findAllUser());
@@ -47,7 +47,7 @@ public class AdminController {
 
     // 删除用户账号
     @Operation(summary = "删除用户账号并返回所有信息", description = "根据用户名删除用户账号")
-    @DeleteMapping("/users/{username}")
+    @DeleteMapping("users/{username}")
     public ResultVO deleteUser(@PathVariable String username) {
         adminService.deleteUser(username);
         return ResultVO.success(adminService.findAllUser());
@@ -55,7 +55,7 @@ public class AdminController {
 
     // 查找用户账号
     @Operation(summary = "查找用户账号", description = "根据用户名查找用户账号")
-    @GetMapping("/users/{username}")
+    @GetMapping("users/{username}")
     public ResultVO findUser(@PathVariable String username) {
         User user = adminService.findUser(username);
         if (user!= null) {
@@ -66,7 +66,7 @@ public class AdminController {
 
     // 添加实验室信息
     @Operation(summary = "添加实验室信息并返回所有信息", description = "添加新的实验室信息")
-    @PostMapping("/labs")
+    @PostMapping("labs")
     public ResultVO addLab(@RequestBody Lab lab) {
         adminService.addLab(lab.getName(),lab.getNumber(), lab.getInformation(),lab.getNews());
         return ResultVO.success(adminService.findAllLab());
@@ -74,7 +74,7 @@ public class AdminController {
 
     // 删除实验室信息
     @Operation(summary = "删除实验室信息并返回所有信息", description = "根据实验室名删除实验室信息")
-    @DeleteMapping("/labs/{labName}")
+    @DeleteMapping("labs/{labName}")
     public ResultVO deleteLab(@PathVariable String labName) {
         adminService.deleteLab(labName);
         return ResultVO.success(adminService.findAllLab());
@@ -82,7 +82,7 @@ public class AdminController {
 
     // 查找实验室信息
     @Operation(summary = "查找实验室信息", description = "根据实验室名查找实验室信息")
-    @GetMapping("/labs/{labName}")
+    @GetMapping("labs/{labName}")
     public ResultVO findLab(@PathVariable String labName) {
         Lab lab = adminService.findLab(labName);
         if (lab!= null) {
@@ -93,7 +93,7 @@ public class AdminController {
 
     // 添加课程信息
     @Operation(summary = "添加课程信息并返回所有信息", description = "添加新的课程信息")
-    @PostMapping("/courses")
+    @PostMapping("courses")
     public ResultVO addCourse(@RequestBody Course course) {
         adminService.addCourse(course.getUid(), course.getLid(), course.getCount(), course.getName(), course.getInformation(), course.getWeek(), course.getTime());
         return ResultVO.success(adminService.findAllCourse());
@@ -101,7 +101,7 @@ public class AdminController {
 
     // 删除课程信息
     @Operation(summary = "删除课程信息并返回所有信息", description = "根据课程名删除课程信息")
-    @DeleteMapping("/courses/{courseName}")
+    @DeleteMapping("courses/{courseName}")
     public ResultVO deleteCourse(@PathVariable String courseName) {
         adminService.deleteCourse(courseName);
         return ResultVO.success(adminService.findAllCourse());
@@ -109,7 +109,7 @@ public class AdminController {
 
     // 查找课程信息
     @Operation(summary = "查找课程信息", description = "根据课程名查找课程信息")
-    @GetMapping("/courses/{courseName}")
+    @GetMapping("courses/{courseName}")
     public ResultVO findCourse(@PathVariable String courseName) {
         Course course = adminService.findCourse(courseName);
         if (course!= null) {
@@ -120,7 +120,7 @@ public class AdminController {
 
     // 更新实验室公告
     @Operation(summary = "更新实验室公告", description = "根据实验室名更新实验室公告")
-    @PostMapping("/labs/{labName}")
+    @PostMapping("labs/{labName}")
     public ResultVO updateNews(@PathVariable String labName, @RequestBody String news) {
         adminService.updateNews(labName, news);
         return ResultVO.success(adminService.findLab(labName));

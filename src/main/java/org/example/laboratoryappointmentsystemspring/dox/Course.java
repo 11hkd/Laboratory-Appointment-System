@@ -1,5 +1,6 @@
 package org.example.laboratoryappointmentsystemspring.dox;
 
+import io.swagger.v3.core.util.Json;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Table("course")
 @Component
-public class Course implements Serializable {
+public class Course implements Serializable{
     @Id
     @CreatedBy
     private Integer id;
@@ -27,7 +28,7 @@ public class Course implements Serializable {
     private Integer lid;
     private Integer count;
     private String name;
-    private String information; // JSON格式数据在Java中可以用String类型先接收，后续按需处理
+    private Json information; // JSON格式数据在Java中可以用String类型先接收，后续按需处理
     private String week;
     private String time;
     private LocalDateTime insert_time;

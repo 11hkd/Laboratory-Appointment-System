@@ -1,5 +1,6 @@
 package org.example.laboratoryappointmentsystemspring.dox;
 
+import io.swagger.v3.core.util.Json;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,7 +31,7 @@ public class Appointment implements Serializable {
     private Integer section;
     private Integer day_of_week;
     private String status;
-    private String details;
+    private Json details;
     private LocalDateTime insert_time;
     private LocalDateTime update_time;
 //    1

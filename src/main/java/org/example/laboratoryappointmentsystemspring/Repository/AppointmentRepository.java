@@ -1,5 +1,6 @@
 package org.example.laboratoryappointmentsystemspring.Repository;
 
+import io.swagger.v3.core.util.Json;
 import org.example.laboratoryappointmentsystemspring.dox.Appointment;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
@@ -18,7 +19,7 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
     @Modifying
     @Transactional
     @Query("insert into appointment(uid, lid, cid, week, section, day_of_week, status, details) values(:uid, :lid, :cid, :week, :section, :day_of_week, :status, :details)")
-    public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, String details);
+    public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, Json details);
 
 
     // 删除预约信息

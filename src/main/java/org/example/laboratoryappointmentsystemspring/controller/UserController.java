@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/users/")
 @Tag(name = "用户接口")
 public class UserController {
 
@@ -27,7 +27,7 @@ public class UserController {
 
     // 添加预约信息
     @Operation(summary = "添加预约信息并返回所有用户信息", description = "添加新的预约信息")
-    @PostMapping("/appointments")
+    @PostMapping("appointments")
     public ResultVO addAppointment(@RequestBody Appointment appointment) {
         userService.addAppointment(appointment.getUid(), appointment.getLid(), appointment.getCid(), appointment.getWeek(), appointment.getSection(), appointment.getDay_of_week(), appointment.getStatus(), appointment.getDetails());
         return ResultVO.success(userService.getUserAppointments(appointment.getUid()));
@@ -35,7 +35,7 @@ public class UserController {
 
     // 删除预约信息
     @Operation(summary = "删除预约信息并返回所有信息", description = "根据预约ID删除预约记录")
-    @DeleteMapping("/appointments/{appointmentId}")
+    @DeleteMapping("appointments/{appointmentId}")
     public ResultVO deleteAppointment(@PathVariable Integer appointmentId) {
         userService.deleteAppointment(appointmentId);
         return ResultVO.success(userService.getUserAppointments(appointmentId));
@@ -43,7 +43,7 @@ public class UserController {
 
     // 根据实验室名查找实验室
     @Operation(summary = "根据实验室名查找实验室", description = "根据传入的实验室名查找对应的实验室信息")
-    @GetMapping("/labs/{labName}")
+    @GetMapping("labs/{labName}")
     public ResultVO findLabByName(@PathVariable String labName) {
         Lab lab = userService.findByLabName(labName);
         if (lab!= null) {
@@ -54,7 +54,7 @@ public class UserController {
 
     // 根据账号获取用户信息
     @Operation(summary = "根据账号获取用户信息", description = "根据传入的账号查找对应的用户信息")
-    @GetMapping("/{account}")
+    @GetMapping("{account}")
     public ResultVO findUserByAccount(@PathVariable String account) {
         User user = userService.findByAccount(account);
         if (user!= null) {
@@ -65,7 +65,7 @@ public class UserController {
 
     // 获取用户的课程列表
     @Operation(summary = "获取用户的课程列表", description = "根据传入的用户ID，获取该用户对应的课程列表信息")
-    @GetMapping("/{userId}/courses")
+    @GetMapping("{userId}/courses")
     public ResultVO getUserCourses(@PathVariable Integer userId) {
         List<Course> courses = userService.getUserCourses(userId);
         if (courses!= null &&!courses.isEmpty()) {
@@ -76,7 +76,7 @@ public class UserController {
 
     // 获取用户的预约历史
     @Operation(summary = "获取用户的预约历史", description = "根据传入的用户ID，获取该用户的预约历史记录")
-    @GetMapping("/{userId}/appointments")
+    @GetMapping("{userId}/appointments")
     public ResultVO getUserAppointments(@PathVariable Integer userId) {
         List<Appointment> appointments = userService.getUserAppointments(userId);
         if (appointments!= null &&!appointments.isEmpty()) {

@@ -1,5 +1,6 @@
 package org.example.laboratoryappointmentsystemspring.Repository;
 
+import io.swagger.v3.core.util.Json;
 import org.example.laboratoryappointmentsystemspring.dox.Lab;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
@@ -19,7 +20,7 @@ public interface LabRepository extends CrudRepository<Lab, Integer> {
     @Modifying
     @Transactional
     @Query("insert into labs(name,number,information, news) values(:name,:number, :information, :news)")
-    public void addLab(String name,Integer number, String information, String news);
+    public void addLab(String name, Integer number, Json information, Json news);
 
     // 删除实验室信息
     @Modifying

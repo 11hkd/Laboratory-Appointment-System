@@ -1,5 +1,6 @@
 package org.example.laboratoryappointmentsystemspring.service;
 
+import io.swagger.v3.core.util.Json;
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.example.laboratoryappointmentsystemspring.Repository.AppointmentRepository;
@@ -43,7 +44,7 @@ public class AdminService {
     }
 
     // 添加实验室信息（依据LabRepository.addLab方法的参数要求传递参数，返回值为void，执行插入操作）
-    public void addLab(String name, int number, String information, String news) {
+    public void addLab(String name, int number, Json information, Json news) {
         labRepository.addLab(name,number, information, news);
     }
 
@@ -65,7 +66,7 @@ public class AdminService {
     // 以下可以根据业务需求添加更多管理员相关的操作方法，比如管理课程信息、管理预约信息等，以下是简单示例
 
     // 添加课程信息（假设根据业务逻辑调用CourseRepository.addCourse方法，需按其参数要求传递）
-    public void addCourse(Integer uid, Integer lid, Integer count, String courseName, String information, String week, String time) {
+    public void addCourse(Integer uid, Integer lid, Integer count, String courseName, Json information, String week, String time) {
         courseRepository.addCourse(uid, lid, count, courseName, information, week, time);
     }
 

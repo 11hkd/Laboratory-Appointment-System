@@ -1,6 +1,7 @@
 package org.example.laboratoryappointmentsystemspring.dox;
 
 
+import io.swagger.v3.core.util.Json;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,8 +27,8 @@ public class Lab implements Serializable {
     private Integer id;
     private String name;
     private Integer number;
-    private String information; // JSON格式数据在Java中可以用String类型先接收
-    private String news; // JSON格式数据在Java中可以用String类型先接收
+    private Json information; // JSON格式数据在Java中可以用String类型先接收
+    private Json news; // JSON格式数据在Java中可以用String类型先接收
     private LocalDateTime insert_time;
     private LocalDateTime update_time;
 }

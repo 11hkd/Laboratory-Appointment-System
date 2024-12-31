@@ -1,5 +1,6 @@
 package org.example.laboratoryappointmentsystemspring.service;
 
+import io.swagger.v3.core.util.Json;
 import org.example.laboratoryappointmentsystemspring.Repository.AppointmentRepository;
 import org.example.laboratoryappointmentsystemspring.Repository.CourseRepository;
 import org.example.laboratoryappointmentsystemspring.Repository.LabRepository;
@@ -28,7 +29,7 @@ public class UserService {
     }
 
     // 添加预约信息
-    public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, String details) {
+    public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, Json details) {
         appointmentRepository.addAppointment(uid, lid, cid, week, section, day_of_week, status, details);
     }
 
