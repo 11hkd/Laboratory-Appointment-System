@@ -14,6 +14,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Component
 public class Login implements Serializable {
-    private String Account;
+    private String account;
     private String password;
 }
