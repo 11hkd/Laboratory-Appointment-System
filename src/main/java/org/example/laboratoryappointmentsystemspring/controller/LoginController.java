@@ -37,6 +37,6 @@ private final AdminService adminService;
     @GetMapping("user/{account}")
 //    传一个可变参数，获取用户，当get/api/admin/user/1001时，调用userService的getUserByAccount方法，返回用户
     public ResultVO getUser(@PathVariable String account){
-        return ResultVO.success(adminService.findAllUser());
+        return ResultVO.success(adminService.findUser(account));
     }
 }

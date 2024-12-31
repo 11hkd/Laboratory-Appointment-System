@@ -95,7 +95,7 @@ public class AdminController {
     @Operation(summary = "添加课程信息并返回所有信息", description = "添加新的课程信息")
     @PostMapping("/courses")
     public ResultVO addCourse(@RequestBody Course course) {
-        adminService.addCourse(course.getUid(), course.getLid(), course.getCount(), String.valueOf(course.getCount()), course.getInformation(), course.getWeek(), course.getTime());
+        adminService.addCourse(course.getUid(), course.getLid(), course.getCount(), course.getName(), course.getInformation(), course.getWeek(), course.getTime());
         return ResultVO.success(adminService.findAllCourse());
     }
 
