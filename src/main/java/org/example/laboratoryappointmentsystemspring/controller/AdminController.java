@@ -74,7 +74,7 @@ public class AdminController {
 
     // 删除实验室信息
     @Operation(summary = "删除实验室信息并返回所有信息", description = "根据实验室名删除实验室信息")
-    @DeleteMapping("labs/{labName}")
+    @DeleteMapping("deleteLabs/{labName}")
     public ResultVO deleteLab(@PathVariable String labName) {
         adminService.deleteLab(labName);
         return ResultVO.success(adminService.findAllLab());
@@ -93,7 +93,7 @@ public class AdminController {
 
     // 添加课程信息
     @Operation(summary = "添加课程信息并返回所有信息", description = "添加新的课程信息")
-    @PostMapping("courses")
+    @PostMapping("addCourses")
     public ResultVO addCourse(@RequestBody Course course) {
         adminService.addCourse(course.getUid(), course.getLid(), course.getCount(), course.getName(), course.getInformation(), course.getWeek(), course.getTime());
         return ResultVO.success(adminService.findAllCourse());
@@ -101,7 +101,7 @@ public class AdminController {
 
     // 删除课程信息
     @Operation(summary = "删除课程信息并返回所有信息", description = "根据课程名删除课程信息")
-    @DeleteMapping("courses/{courseName}")
+    @DeleteMapping("deleteCourses/{courseName}")
     public ResultVO deleteCourse(@PathVariable String courseName) {
         adminService.deleteCourse(courseName);
         return ResultVO.success(adminService.findAllCourse());
@@ -120,7 +120,7 @@ public class AdminController {
 
     // 更新实验室公告
     @Operation(summary = "更新实验室公告", description = "根据实验室名更新实验室公告")
-    @PostMapping("labs/{labName}")
+    @PostMapping("updateLabs/{labName}")
     public ResultVO updateNews(@PathVariable String labName, @RequestBody String news) {
         adminService.updateNews(labName, news);
         return ResultVO.success(adminService.findLab(labName));
