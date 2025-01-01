@@ -28,7 +28,7 @@ public class Course implements Serializable{
     private Integer lid;
     private Integer count;
     private String name;
-    private Json information; // JSON格式数据在Java中可以用String类型先接收，后续按需处理
+    private String information; // JSON格式数据在Java中可以用String类型先接收，后续按需处理
     private String week;
     private String time;
     private LocalDateTime insert_time;

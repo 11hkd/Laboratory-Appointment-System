@@ -31,7 +31,7 @@ public class Appointment implements Serializable {
     private Integer section;
     private Integer day_of_week;
     private String status;
-    private Json details;
+    private String details;
     private LocalDateTime insert_time;
     private LocalDateTime update_time;
 //    1

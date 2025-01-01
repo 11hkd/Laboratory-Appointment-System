@@ -29,7 +29,7 @@ public class UserService {
     }
 
     // 添加预约信息
-    public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, Json details) {
+    public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, String details) {
         appointmentRepository.addAppointment(uid, lid, cid, week, section, day_of_week, status, details);
     }
 

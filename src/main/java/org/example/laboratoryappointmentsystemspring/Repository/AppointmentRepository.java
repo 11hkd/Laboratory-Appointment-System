@@ -19,7 +19,7 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
     @Modifying
     @Transactional
     @Query("insert into appointment(uid, lid, cid, week, section, day_of_week, status, details) values(:uid, :lid, :cid, :week, :section, :day_of_week, :status, :details)")
-    public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, Json details);
+    public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, String details);
 
 
     // 删除预约信息

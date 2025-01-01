@@ -21,7 +21,7 @@ public interface CourseRepository extends CrudRepository<Course, Integer> {
     @Modifying
     @Transactional
     @Query("insert into courses(uid, lid, count, name, information, week, time) values(:uid, :lid, :count, :courseName, :information, :week, :time)")
-    public void addCourse(Integer uid, Integer lid, Integer count, String courseName, Json information, String week, String time);
+    public void addCourse(Integer uid, Integer lid, Integer count, String courseName, String information, String week, String time);
 
     // 删除课程信息
     // 参数类型与数据表中主键类型一致（这里是根据课程名删除，实际更合理的可能是根据主键id删除，可根据业务需求调整）
