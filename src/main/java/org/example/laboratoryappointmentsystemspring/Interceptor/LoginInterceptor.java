@@ -20,7 +20,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         if(token==null){
             throw xException.builder().code(Code.UNAUTHORIZED).build();
         }
-        //解码JWT,获取uid和role,并且放到request的属性中,因为后面的controller需要用到,并且request是线程安全的
+
         DecodedJWT decode =jwtComponent.decode(token);
         String uid = decode.getClaim("uid").asString();
         String role = decode.getClaim("role").asString();

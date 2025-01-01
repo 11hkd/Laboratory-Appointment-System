@@ -24,6 +24,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/api/")
 public class LoginController {
+    private final JWTComponent jwtComponent;
     private final UserService userService;
 private final AdminService adminService;
     //    get请求，获取所有用户,当get/api/admin/users时，调用userService的listUsers方法，返回所有用户
@@ -36,8 +37,16 @@ private final AdminService adminService;
     //接口层调用组件层的方法，返回用户
     @Operation(summary = "根据账号密码拿用户", description = "根据账号密码拿用户")
     @PostMapping("login")
-    public ResultVO getUser(@RequestBody Login login){
+    public ResultVO getUser(@RequestBody Login login, HttpServletResponse resp){
         log.info("login:{}",login);
-       return ResultVO.success(userService.findByAccount(adminService.findByAccountAndPassword(login.getAccount(), login.getPassword())));
+        User user = userService.findByAccount(adminService.findByAccountAndPassword(login.getAccount(), login.getPassword()));
+        if(user==null){
+            return ResultVO.error(400,"账号或密码错误");
+        }
+        String token = jwtComponent.encode(Map.of("uid", user.getId(),"role", user.getRole()));
+        resp.addHeader("token", token);
+        resp.addHeader("uid", user.getId());
+        resp.addHeader("role", user.getRole());
+       return ResultVO.success(user);
     }
 }

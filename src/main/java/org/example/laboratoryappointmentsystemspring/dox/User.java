@@ -21,9 +21,8 @@ import java.time.LocalDateTime;
 public class User implements Serializable {
     @Id
     @CreatedBy
-    public static final String SUPPERADMIN_ROLE = "bala";
-    public static final String ADMIN_ROLE = "venv";
-    public static final String TEACHER_ROLE = "race";
+    public static final String ADMIN_ROLE = "admin";
+    public static final String TEACHER_ROLE = "teacher";
     private String id;
     private String username;
     private String account;
