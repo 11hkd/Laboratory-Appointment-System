@@ -61,8 +61,8 @@ public class AdminService {
     }
 
     // 删除实验室信息（调用LabRepository.deleteByLabName方法，正确传递参数，返回值为void执行删除）
-    public void deleteLab(@NotBlank(message = "实验室名称不能为空") String labName) {
-        labRepository.deleteByLabName(labName);
+    public void deleteLab(@NotBlank(message = "实验室名称不能为空") String labId) {
+        labRepository.deleteByLabName(labId);
     }
 
     // 查找实验室信息（调用LabRepository.findByLabName方法，返回Lab对象便于后续业务使用）
@@ -90,8 +90,8 @@ public class AdminService {
     }
 
     // 删除课程信息（调用CourseRepository.deleteByCourseName方法，传递正确参数，返回值为void执行删除）
-    public void deleteCourse(@NotBlank(message = "课程名不能为空") String courseName) {
-        courseRepository.deleteByCourseName(courseName);
+    public void deleteCourse(@NotBlank(message = "课程名不能为空") String courseId) {
+        courseRepository.deleteByCourseName(courseId);
     }
 
     // 查找课程信息（调用CourseRepository.findByCourseName方法，返回查找到的Course对象供后续业务使用）

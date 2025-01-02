@@ -27,8 +27,8 @@ public interface CourseRepository extends CrudRepository<Course, Integer> {
     // 参数类型与数据表中主键类型一致（这里是根据课程名删除，实际更合理的可能是根据主键id删除，可根据业务需求调整）
     @Modifying
     @Transactional
-    @Query("delete from courses where name=:courseName")
-    public void deleteByCourseName(String courseName);
+    @Query("delete from courses where id=:courseId")
+    public void deleteByCourseName(String courseId);
 
     // 获取用户的课程列表（通过用户id关联查询课程，需要根据实际业务逻辑和数据表关联关系完善）
     @Query("SELECT * from courses where uid=:uid")
