@@ -46,11 +46,26 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
     // 自定义查询方法用于检测预约冲突
     @Query("SELECT COUNT(*) > 0 FROM appointment a " +
             "WHERE a.lid = :lid " +
-            "AND a.cid = :cid " +
             "AND a.week = :week " +
             "AND a.day_of_week = :day_of_week " +
             "AND a.section = :section " +
             "AND a.status!= 'canceled'")
     boolean isConflict(Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week);
+
+    //根据周数天数节数查询可用实验室
+    @Query("SELECT l.name\n" +
+            "FROM labs l\n" +
+            "WHERE l.id NOT IN (\n" +
+            "    SELECT a.lid\n" +
+            "    FROM appointment a\n" +
+            "    WHERE a.week = :week" +
+            "      AND a.day_of_week = :day_of_week\n" +
+            "      AND a.section = :section\n" +
+            "      AND a.status = 'approved'\n" +
+            ")\n" +
+            "ORDER BY l.id;")
+public List<String> findAvailableLab(Integer week,Integer day_of_week,Integer section);
 }
+
+
 

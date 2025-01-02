@@ -31,7 +31,7 @@ public class JWTComponent {
     }
 
     public String encode(Map<String,Object>map){//这个map是要放到JWT中的信息
-        LocalDateTime time = LocalDateTime.now().plusDays(1);//这个是过期时间
+        LocalDateTime time = LocalDateTime.now().plusDays(10);//这个是过期时间
 //        过期时间为一天
         return JWT.create()
                 .withPayload(map)

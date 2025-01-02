@@ -72,5 +72,9 @@ public class UserService {
     public List<User> findTeacherByThreeWeeks() {
         return userRepository.findTeacherByThreeWeeks();
     }
+    //根据周数天数节数查询可用实验室
+    public List<String> findAvailableLab(Integer week,Integer day_of_week,Integer section) {
+        return appointmentRepository.findAvailableLab(week,day_of_week,section);
+    }
 
 }

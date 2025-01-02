@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `appointment` (
                                              lid TINYINT NOT NULL,
                                              cid INT NOT NULL,
                                              week TINYINT UNSIGNED NOT NULL,
-                                             section TINYINT UNSIGNED NOT NULL,
+                                             String TINYINT UNSIGNED NOT NULL,
                                              day_of_week TINYINT UNSIGNED NOT NULL,
                                              status ENUM('pending', 'approved', 'rejected', 'canceled') NOT NULL DEFAULT 'pending',
                                              details JSON NULL COMMENT '{

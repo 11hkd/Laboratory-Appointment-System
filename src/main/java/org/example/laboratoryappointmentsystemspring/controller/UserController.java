@@ -2,10 +2,8 @@ package org.example.laboratoryappointmentsystemspring.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.laboratoryappointmentsystemspring.dox.Appointment;
-import org.example.laboratoryappointmentsystemspring.dox.Course;
-import org.example.laboratoryappointmentsystemspring.dox.Lab;
-import org.example.laboratoryappointmentsystemspring.dox.User;
+import lombok.extern.slf4j.Slf4j;
+import org.example.laboratoryappointmentsystemspring.dox.*;
 import org.example.laboratoryappointmentsystemspring.service.UserService;
 import org.example.laboratoryappointmentsystemspring.vo.ResultVO;
 import org.springframework.http.HttpStatus;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/users/")
 @Tag(name = "用户接口")
@@ -84,4 +83,12 @@ public class UserController {
         }
         return ResultVO.error(HttpStatus.NOT_FOUND.value(), "未找到该用户的预约历史信息");
     }
+    //根据周数星期节数获取查询可用实验室
+    @Operation(summary="根据周数星期节数获取查询可用实验室",description = "根据周数星期节数获取查询可用实验室")
+    @PostMapping("findAvailableLab")
+    public ResultVO findAvailableLab(@RequestBody AppointmentTime appointmentTime){
+        log.info("拿到了{}",appointmentTime);
+        return ResultVO.success(userService.findAvailableLab(appointmentTime.getWeek(),appointmentTime.getDay_of_week(),appointmentTime.getSection()));
+    }
+
 }
