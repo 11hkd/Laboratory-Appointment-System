@@ -137,7 +137,7 @@ public class AdminController {
     @Operation(summary = "查找预约次数最多的用户,授予工作狂称号", description = "查找预约次数最多的用户")
     @GetMapping("getMostAppointmentsUser")
     public ResultVO getMostAppointmentsUser(){
-        return ResultVO.success(userService.getUserAppointments(adminService.findMostAppointmentUser()));
+        return ResultVO.success(adminService.findById(adminService.findMostAppointmentUser()));
     }
 
     //查找连续三周预约上课的老师

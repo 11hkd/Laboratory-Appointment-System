@@ -125,4 +125,9 @@ public class AdminService {
     public int findMostAppointmentUser() {
         return appointmentRepository.findMostAppointmentUser();
     }
+
+    //根据id查找
+    public User findById(Integer id){
+        return userRepository.findByID(id);
+    }
 }

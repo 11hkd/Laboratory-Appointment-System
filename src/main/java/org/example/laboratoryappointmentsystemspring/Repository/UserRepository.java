@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<User, Integer> {
     // 根据用户ID查找
     @Query("SELECT * from users where id=:id")
-    public Optional<User> findById(Integer id);
+    public User findByID(Integer id);
 
     // 根据用户名查找
     @Query("SELECT * from users where username=:username")
