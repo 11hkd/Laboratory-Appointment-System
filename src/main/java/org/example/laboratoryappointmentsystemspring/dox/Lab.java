@@ -1,6 +1,8 @@
 package org.example.laboratoryappointmentsystemspring.dox;
 
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.v3.core.util.Json;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
