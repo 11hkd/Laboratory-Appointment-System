@@ -37,4 +37,10 @@ public interface LabRepository extends CrudRepository<Lab, Integer> {
     @Transactional
     @Query("update labs set news=:news where name=:labName")
     public void updateNews(String news, String labName);
+
+    //返回所有实验室的所有公告
+@Modifying
+@Transactional
+@Query("SELECT news from labs")
+public List<String> findAllNews();
 }

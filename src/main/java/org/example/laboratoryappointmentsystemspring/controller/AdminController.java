@@ -46,10 +46,10 @@ public class AdminController {
     }
 
     // 删除用户账号
-    @Operation(summary = "删除用户账号并返回所有信息", description = "根据用户名删除用户账号")
-    @DeleteMapping("deleteUser/{username}")
-    public ResultVO deleteUser(@PathVariable String username) {
-        adminService.deleteUser(username);
+    @Operation(summary = "根据删除用户ID删除账号并返回所有信息", description = "根据用户ID删除用户账号")
+    @DeleteMapping("deleteUser/{userID}")
+    public ResultVO deleteUser(@PathVariable String userID) {
+        adminService.deleteUser(userID);
         return ResultVO.success(adminService.findAllUser());
     }
 
@@ -137,7 +137,7 @@ public class AdminController {
     @Operation(summary = "查找预约次数最多的用户,授予工作狂称号", description = "查找预约次数最多的用户")
     @GetMapping("getMostAppointmentsUser")
     public ResultVO getMostAppointmentsUser(){
-        return ResultVO.success(userService.getUserAppointments(adminService.findMostAppointmentUser()));
+        return ResultVO.success(adminService.findById(adminService.findMostAppointmentUser()));
     }
 
     //查找连续三周预约上课的老师
@@ -145,5 +145,11 @@ public class AdminController {
     @GetMapping("getThreeWeeksTeacher")
     public ResultVO getThreeWeeksTeacher(){
         return ResultVO.success(userService.findTeacherByThreeWeeks());
+    }
+    //返回实验室所有公告
+    @Operation(summary = "返回实验室所有公告", description = "返回实验室所有公告")
+    @GetMapping("getAllLabNews")
+    public ResultVO getLabNews(){
+        return ResultVO.success(adminService.findAllNews());
     }
 }

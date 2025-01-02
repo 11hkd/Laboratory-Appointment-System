@@ -37,8 +37,8 @@ public class AdminService {
     }
 
     // 删除用户账号（调用UserRepository.deleteByUsername方法，参数传递正确，返回值为void符合删除操作）
-    public void deleteUser(@NotBlank(message = "用户名不能为空") String username) {
-        userRepository.deleteByUsername(username);
+    public void deleteUser(@NotBlank(message = "用户名不能为空") String userId) {
+        userRepository.deleteByUsername(userId);
     }
 
     // 返回所有用户信息
@@ -125,4 +125,15 @@ public class AdminService {
     public int findMostAppointmentUser() {
         return appointmentRepository.findMostAppointmentUser();
     }
+
+    //根据id查找
+    public User findById(Integer id){
+        return userRepository.findByID(id);
+    }
+
+    //返回实验室所有公告
+    public List<String> findAllNews(){
+        return labRepository.findAllNews();
+    }
+
 }

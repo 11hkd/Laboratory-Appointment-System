@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<User, Integer> {
     // 根据用户ID查找
     @Query("SELECT * from users where id=:id")
-    public Optional<User> findById(Integer id);
+    public User findByID(Integer id);
 
     // 根据用户名查找
     @Query("SELECT * from users where username=:username")
@@ -29,8 +29,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     // 删除用户
     @Modifying
     @Transactional
-    @Query("delete from users where username=:username")
-    public void deleteByUsername(String username);
+    @Query("delete from users where id=:userId")
+    public void deleteByUsername(String userId);
 
     // 根据账号Account获取用户
     @Query("SELECT * from users where account=:account")
