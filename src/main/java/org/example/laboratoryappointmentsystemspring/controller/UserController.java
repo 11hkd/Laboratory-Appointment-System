@@ -91,4 +91,10 @@ public class UserController {
         return ResultVO.success(userService.findAvailableLab(appointmentTime.getWeek(),appointmentTime.getDay_of_week(),appointmentTime.getSection()));
     }
 
+    @Operation(summary = "用户更新密码接口", description = "老师更新密码接口")
+    @PostMapping("updatePassword/{id}")
+    public ResultVO updatePassword(@PathVariable Integer id, @RequestParam String password) {
+        userService.updatePassword(id, password);
+        return ResultVO.success("密码更新成功");
+    }
 }

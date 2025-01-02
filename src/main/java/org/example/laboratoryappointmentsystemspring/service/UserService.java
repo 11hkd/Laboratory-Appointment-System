@@ -77,4 +77,7 @@ public class UserService {
         return appointmentRepository.findAvailableLab(week,day_of_week,section);
     }
 
+    public void updatePassword(int id, String password) {
+        userRepository.updatePassword(id,password);
+    }
 }

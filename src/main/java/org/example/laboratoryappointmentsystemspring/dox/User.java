@@ -23,7 +23,7 @@ public class User implements Serializable {
     @CreatedBy
     public static final String ADMIN_ROLE = "admin";
     public static final String TEACHER_ROLE = "teacher";
-    private String id;
+    private Integer id;
     private String username;
     private String account;
     private String password;

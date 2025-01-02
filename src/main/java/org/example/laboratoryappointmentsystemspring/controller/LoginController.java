@@ -46,7 +46,7 @@ private final AdminService adminService;
         }
         String token = jwtComponent.encode(Map.of("uid", user.getId(),"role", user.getRole()));
         resp.addHeader("token", token);
-        resp.addHeader("uid", user.getId());
+        resp.addHeader("uid", String.valueOf(user.getId()));
         resp.addHeader("role", user.getRole());
        return ResultVO.success(user);
     }

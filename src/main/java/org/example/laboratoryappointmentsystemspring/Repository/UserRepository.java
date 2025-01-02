@@ -48,4 +48,9 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("SELECT * from users where id in (SELECT uid from appointment group by uid having count(*)>=5)")
     public List<User> findTeacherByThreeWeeks();
 
+    //用户更改密码
+    @Modifying
+    @Transactional
+    @Query("update users set password=:password where id=:id")
+    public void updatePassword(Integer id,String password);
 }

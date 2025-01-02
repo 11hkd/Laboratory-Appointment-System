@@ -61,7 +61,7 @@ public class AdminService {
     }
 
     // 删除实验室信息（调用LabRepository.deleteByLabName方法，正确传递参数，返回值为void执行删除）
-    public void deleteLab(@NotBlank(message = "实验室名称不能为空") String labId) {
+    public void deleteLab(@NotBlank(message = "实验室Id不能为空") int labId) {
         labRepository.deleteByLabName(labId);
     }
 

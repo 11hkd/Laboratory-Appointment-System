@@ -74,8 +74,8 @@ public class AdminController {
 
     // 删除实验室信息
     @Operation(summary = "删除实验室信息并返回所有信息", description = "根据实验室名删除实验室信息")
-    @DeleteMapping("deleteLabs/{labID}")
-    public ResultVO deleteLab(@PathVariable String labId) {
+    @DeleteMapping("deleteLabs/{labId}")
+    public ResultVO deleteLab(@PathVariable int labId) {
         adminService.deleteLab(labId);
         return ResultVO.success(adminService.findAllLab());
     }
