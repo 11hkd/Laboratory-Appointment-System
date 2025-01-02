@@ -39,5 +39,18 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
     @Query("SELECT * from appointment")
     List<Appointment> findAllAppointments();
 
+    //找出预约次数最多的用户
+    @Query("SELECT uid from appointment group by uid order by count(*) desc limit 1")
+    Integer findMostAppointmentUser();
 
+    // 自定义查询方法用于检测预约冲突
+    @Query("SELECT COUNT(*) > 0 FROM appointment a " +
+            "WHERE a.lid = :lid " +
+            "AND a.cid = :cid " +
+            "AND a.week = :week " +
+            "AND a.day_of_week = :day_of_week " +
+            "AND a.section = :section " +
+            "AND a.status!= 'canceled'")
+    boolean isConflict(Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week);
 }
+

@@ -41,6 +41,7 @@ private final AdminService adminService;
         log.info("login:{}",login);
         User user = userService.findByAccount(adminService.findByAccountAndPassword(login.getAccount(), login.getPassword()));
         if(user==null){
+            log.info("账号或密码错误,login:{}",login);
             return ResultVO.error(400,"账号或密码错误");
         }
         String token = jwtComponent.encode(Map.of("uid", user.getId(),"role", user.getRole()));

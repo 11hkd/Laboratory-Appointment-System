@@ -1,6 +1,7 @@
 package org.example.laboratoryappointmentsystemspring.service;
 
 import io.swagger.v3.core.util.Json;
+import jakarta.validation.constraints.NotBlank;
 import org.example.laboratoryappointmentsystemspring.Repository.AppointmentRepository;
 import org.example.laboratoryappointmentsystemspring.Repository.CourseRepository;
 import org.example.laboratoryappointmentsystemspring.Repository.LabRepository;
@@ -29,9 +30,16 @@ public class UserService {
     }
 
     // 添加预约信息
-    public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week, String status, String details) {
+    public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week,
+                               @NotBlank(message = "预约状态不能为空") String status,
+                               @NotBlank(message = "预约详情不能为空") String details) {
+        // 调用预约仓库的冲突检测方法进行冲突检测
+        if (appointmentRepository.isConflict(lid, cid, week, section, day_of_week)) {
+            throw new RuntimeException("预约冲突，无法添加该预约信息，请重新选择时间或其他相关信息");
+        }
         appointmentRepository.addAppointment(uid, lid, cid, week, section, day_of_week, status, details);
     }
+
 
 
 
@@ -58,6 +66,11 @@ public class UserService {
     // 获取用户的预约历史（假设通过用户id关联查询预约记录，同样需根据实际完善）
     public List<Appointment> getUserAppointments(Integer userId) {
     return (List<Appointment>) appointmentRepository.findByUid(userId);
+    }
+
+    //查找连续三周预约上课的老师
+    public List<User> findTeacherByThreeWeeks() {
+        return userRepository.findTeacherByThreeWeeks();
     }
 
 }

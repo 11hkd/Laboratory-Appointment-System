@@ -43,4 +43,9 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     //根据传来的账号密码返回用户
     @Query("SELECT account from users where account=:account and password=:password")
     public String findByAccountAndPassword(String account, String password);
+
+    //查找连续5周都预约上课的老师
+    @Query("SELECT * from users where id in (SELECT uid from appointment group by uid having count(*)>=5)")
+    public List<User> findTeacherByThreeWeeks();
+
 }

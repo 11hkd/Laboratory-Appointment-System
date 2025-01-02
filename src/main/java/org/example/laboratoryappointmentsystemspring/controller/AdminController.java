@@ -132,4 +132,18 @@ public class AdminController {
     public ResultVO getLabs(){
         return ResultVO.success(adminService.findAllLab());
     }
+
+    //查找预约次数最多的用户
+    @Operation(summary = "查找预约次数最多的用户,授予工作狂称号", description = "查找预约次数最多的用户")
+    @GetMapping("getMostAppointmentsUser")
+    public ResultVO getMostAppointmentsUser(){
+        return ResultVO.success(userService.getUserAppointments(adminService.findMostAppointmentUser()));
+    }
+
+    //查找连续三周预约上课的老师
+    @Operation(summary = "查找连续三周预约上课的老师", description = "查找连续三周预约上课的老师")
+    @GetMapping("getThreeWeeksTeacher")
+    public ResultVO getThreeWeeksTeacher(){
+        return ResultVO.success(userService.findTeacherByThreeWeeks());
+    }
 }
