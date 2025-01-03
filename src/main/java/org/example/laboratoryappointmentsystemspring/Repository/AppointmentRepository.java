@@ -49,7 +49,8 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Integ
             "AND a.week = :week " +
             "AND a.day_of_week = :day_of_week " +
             "AND a.section = :section " +
-            "AND a.status!= 'canceled'")
+            "AND a.status!= 'canceled'" +
+            "FOR UPDATE")
     boolean isConflict(Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week);
 
     //根据周数天数节数查询可用实验室

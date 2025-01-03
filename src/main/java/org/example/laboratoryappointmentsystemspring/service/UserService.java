@@ -33,11 +33,24 @@ public class UserService {
     public void addAppointment(Integer uid, Integer lid, Integer cid, Integer week, Integer section, Integer day_of_week,
                                @NotBlank(message = "预约状态不能为空") String status,
                                @NotBlank(message = "预约详情不能为空") String details) {
+        try{
         // 调用预约仓库的冲突检测方法进行冲突检测
         if (appointmentRepository.isConflict(lid, cid, week, section, day_of_week)) {
             throw new RuntimeException("预约冲突，无法添加该预约信息，请重新选择时间或其他相关信息");
         }
         appointmentRepository.addAppointment(uid, lid, cid, week, section, day_of_week, status, details);
+        }
+        catch (Exception e) {
+            // 根据具体异常类型进行更细致的处理，比如数据库操作异常（可能是锁等待超时、死锁等情况）
+            if (e instanceof org.springframework.dao.DeadlockLoserDataAccessException) {
+                System.err.println("添加预约时出现死锁情况，请稍后重试。");
+            } else if (e instanceof org.springframework.dao.PessimisticLockingFailureException) {
+                System.err.println("添加预约时悲观锁获取失败，可能存在并发冲突，请稍后重试。");
+            } else {
+                System.err.println("添加预约出现其他异常: " + e.getMessage());
+            }
+            throw e;
+        }
     }
 
 
